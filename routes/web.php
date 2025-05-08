@@ -10,6 +10,9 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('profile', function () {
+    return Inertia::render('profile/profile');
+})->middleware(['auth', 'verified'])->name('profile');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
