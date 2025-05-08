@@ -18,10 +18,39 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'image',
         'name',
+        'lastname',
         'email',
+        'city_id',
+        'address',
         'password',
+        'birthday',
+        'phone',
+        'gender',
+        'role',
+        'google_id',
+        'email_verified_at',
     ];
+
+    public function jobs(){
+        return $this->hasMany(Post::class, 'user_id');
+    }
+    public function company(){
+        return $this->hasOne(Company::class, 'user_id');
+    }
+    public function city(){
+        return $this->belongsTo(City::class, 'city_id');
+    }
+    public function applications(){
+        return $this->hasMany(Application::class, 'user_id');
+    }
+    public function cv(){
+        return $this->hasOne(Cv::class, 'user_id');
+    }
+    public function savedPosts(){
+        return $this->hasMany(Post::class, 'user_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
