@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
+use App\Models\Company;
+use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Factories\CompanyFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +18,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
+        $this->call(CitySeeder::class);
+        $this->call(CategorySeeder::class);
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'image' => 'profile/4hHxL9FQTTFkYRHctziAmMYxALh72D1ZkTGBsPZS.jpg',
+            'name' => 'Oltion',
+            'lastname' => 'Mustafa',
+            'email' => 'oltionmustafaa@gmail.com',
+            'city_id' => City::find(4)->id,
+            'address' => 'Thimi Mitko',
+            'birthday' => '2002-11-04',
+            'phone' => '+38349388052',
+            'gender' => 'male',
+            'role' => 'employer',
+            'password' => Hash::make('Olti2002.'),
+            'email_verified_at' => now(),
         ]);
+        User::factory()->create([
+            'image' => 'profile/4hHxL9FQTTFkYRHctziAmMYxALh72D1ZkTGBsPZS.jpg',
+            'name' => 'Admin',
+            'lastname' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'city_id' => City::find(4)->id,
+            'address' => 'Sami Frasheri',
+            'birthday' => '1992-11-22',
+            'phone' => '+38349222555',
+            'gender' => 'male',
+            'role' => 'admin',
+            'password' => Hash::make('admin'),
+            'email_verified_at' => now(),
+        ]);
+        User::factory(10)->create();
+        Company::factory(1)->create();
+        Post::factory(10)->create();
     }
 }
