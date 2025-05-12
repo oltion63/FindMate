@@ -13,7 +13,7 @@ class CompanyController extends Controller
 {
     public function create(){
 
-        return Inertia::render('Jobs/CreateCompany', [
+        return Inertia::render('jobs/CreateCompany', [
             'authUser' => auth()->id(),
         ]);
     }
@@ -50,11 +50,17 @@ class CompanyController extends Controller
 
         return redirect(route('profilePage'))->with('success', 'Company created.');
     }
+    public function edit(){
+        $company = Company::where('user_id', auth()->id())->first();
+        return Inertia::render('settings/Company', [
+            'authUser' => auth()->id(),
+            'company' => $company,
+        ]);
+    }
 
     public function update(Request $request, $id){
         $company = Company::where('user_id', auth()->id())->find($id);
         $request->validate([
-            'user_id' => 'required',
             'name' => 'sometimes|required',
             'description' => 'required',
             'phone' => 'sometimes|required',
@@ -84,7 +90,7 @@ class CompanyController extends Controller
         }
         $company->update(['image' => $imagePath]);
 
-        return Redirect::route('ProfilePage')->with('success', 'Company image updated.');
+        return Redirect::route('profilePage')->with('success', 'Company image updated.');
     }
 
     return back()->with('error', 'No image was uploaded!');
@@ -97,7 +103,7 @@ public function deleteCompany($id)
         return redirect()->back()->with('error', 'You are not allowed to delete this company.');
     }
     $company->delete();
-    return redirect()->back()->with('success', 'Company deleted.');
+    return Redirect::route('profilePage')->with('success', 'Company has been deleted.');
 }
 
 
