@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CvController;
@@ -47,6 +48,14 @@ Route::middleware('auth')->controller(ApplicationController::class)->group(funct
     Route::post('/application/{application}/accept', 'accept')->name('application.accept');
     Route::post('/application/{application}/reject', 'reject')->name('application.reject');
     Route::delete('/application/{id}/delete', 'delete')->name('application.delete');
+});
+
+Route::middleware('auth')->controller(ProfileController::class)->group(function () {
+    Route::get('/profilePage', 'index')->name('profilePage');
+    Route::get('/profile',  'edit')->name('profile.edit');
+    Route::patch('/profile',  'update')->name('profile.update');
+    Route::delete('/profile',  'destroy')->name('profile.destroy');
+    Route::post('profile/update-image',  'updateImage')->name('updateUserImage');
 });
 
 
