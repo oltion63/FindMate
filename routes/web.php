@@ -28,5 +28,17 @@ Route::middleware('admin')->prefix('admin')->controller(AdminController::class)-
     Route::delete('/post/{post}/delete', 'deletePost')->name('post.delete');
 });
 
+Route::middleware(['auth'])->prefix('jobs')->name('jobs.')->controller(PostsController::class)->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::get('/create',  'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/{job}', 'show')->name('show');
+    Route::get('/{job}/edit', 'edit')->name('edit');
+    Route::patch('/{job}', 'update')->name('update');
+    Route::delete('/{job}/destroy',  'destroy')->name('destroy');
+    Route::post('/storeSaved', 'storeSaved')->name('storeSaved');
+    Route::delete('/deleteSaved/{id}', 'deleteSaved')->name('deleteSaved');
+});
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
