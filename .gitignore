@@ -22,3 +22,10 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/storage/*
+!/storage/app/
+!/storage/app/public/
+!/storage/app/public/*
+storage/app/public/company/
+storage/app/public/profile/
+storage/app/public/cv_files/
