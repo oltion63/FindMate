@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CvController;
@@ -28,7 +30,7 @@ Route::middleware('admin')->prefix('admin')->controller(AdminController::class)-
     Route::delete('/post/{post}/delete', 'deletePost')->name('post.delete');
 });
 
-Route::middleware(['auth'])->prefix('jobs')->name('jobs.')->controller(PostsController::class)->group(function () {
+Route::middleware(['auth'])->prefix('jobs')->name('jobs.')->controller(PostController::class)->group(function () {
     Route::get('', 'index')->name('index');
     Route::get('/create',  'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -39,6 +41,14 @@ Route::middleware(['auth'])->prefix('jobs')->name('jobs.')->controller(PostsCont
     Route::post('/storeSaved', 'storeSaved')->name('storeSaved');
     Route::delete('/deleteSaved/{id}', 'deleteSaved')->name('deleteSaved');
 });
+
+Route::middleware('auth')->controller(ApplicationController::class)->group(function () {
+    Route::post('/storeApplication', 'store')->name('storeApplication');
+    Route::post('/application/{application}/accept', 'accept')->name('application.accept');
+    Route::post('/application/{application}/reject', 'reject')->name('application.reject');
+    Route::delete('/application/{id}/delete', 'delete')->name('application.delete');
+});
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
