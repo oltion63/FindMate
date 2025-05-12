@@ -92,7 +92,7 @@ class PostController extends Controller
                     'saved_post_id' => $saved->id,
                 ];
             });
-        return Inertia::render('Jobs/Jobs', [
+        return Inertia::render('jobs/Jobs', [
             'categories' => $categories,
             'cities' => $cities,
             'posts' => $posts,
@@ -112,7 +112,7 @@ class PostController extends Controller
             return redirect()->route('profilePage')->with('error', 'You aren`t registered as an employer');
         }
 
-        return Inertia::render('Jobs/CreateJob', [
+        return Inertia::render('jobs/CreateJob', [
             'authUser' => auth()->id(),
             'cities' => $cities,
             'categories' => $categories,
@@ -164,7 +164,7 @@ class PostController extends Controller
             ->where('user_id', auth()->id())
             ->pluck('id')
             ->first();
-        return Inertia::render('Jobs/ShowJob', [
+        return Inertia::render('jobs/ShowJobs', [
             'post' => $post,
             'savedPost' => $savedPost,
             'user' => $user,
@@ -180,7 +180,7 @@ class PostController extends Controller
             return redirect()->route('jobs.index')->with('error', 'You don`t have permission to access this page');
         }
 
-        return Inertia::render('Jobs/EditJob', [
+        return Inertia::render('jobs/EditJob', [
             'authUser' => auth()->id(),
             'post' => $post,
             'cities' => $cities,
