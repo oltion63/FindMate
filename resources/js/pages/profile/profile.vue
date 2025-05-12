@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import {Head, Link} from "@inertiajs/vue3";
-import UserInfo from "@/Components/profile/UserInfo.vue";
-import UserStats from "@/Components/profile/UserStats.vue";
+import UserInfo from "@/components/profile/UserInfo.vue";
+import UserStats from "@/components/profile/UserStats.vue";
 import UserApplications from "@/components/profile/UserApplications.vue";
 import {ref} from "vue";
 import EmployeeApplications from "@/components/profile/EmployeeApplications.vue";
@@ -106,13 +106,8 @@ const breadcrumbs: BreadcrumbItem[] = [
     <Head title="Profile"/>
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <template #header>
-            <div class="flex justify-between w-full items-end pt-14">
-                <h2
-                    class="text-2xl font-bold leading-tight text-gray-800"
-                >
-                    Profile
-                </h2>
+        <main class="mx-auto">
+            <div class="flex justify-end items-end py-8">
                 <Link
                     v-if="(!company || company.length === 0) && $page.props.auth.user.role === 'employer'"
                     :href="route('createCompany')"
@@ -142,10 +137,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                     Edit CV
                 </button>
             </div>
-        </template>
-        <main class="mx-auto max-w-7xl ">
-
-            <div class="lg:flex justify-center gap-9 px-6">
+            <div class="lg:flex justify-center gap-9">
                 <UserInfo :user="user"/>
                 <div class="w-full" id="right-side">
                     <UserStats :isModalVisible="isModalVisible" @update:isModalVisible="updateModalVisibility" :countApplications="countApplications" :countSaved="countSaved" :countApplied="countApplied" :countPosts="countPosts" :isCvVisible="isCvVisible" @update:isCvVisible="updateCvVisibility"/>

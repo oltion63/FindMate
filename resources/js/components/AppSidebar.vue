@@ -22,6 +22,18 @@ const mainNavItems: NavItem[] = [
         href: '/profilePage',
         icon: LayoutGrid,
     },
+    {
+        title: 'Jobs',
+        href: '/jobs',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Add Job',
+        href: '/jobs/create',
+        icon: LayoutGrid,
+        role: ['employer'],
+    },
+
 ];
 
 const footerNavItems: NavItem[] = [
