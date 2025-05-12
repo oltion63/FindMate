@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import {Link} from "@inertiajs/vue3";
+const props = defineProps({
+    employerPosts: {
+        type: Array,
+    },
+})
 
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB");
+}
 </script>
 
 <template>
@@ -24,17 +33,23 @@ import {Link} from "@inertiajs/vue3";
                         </tr>
                         </thead>
                         <tbody class="overflow-y-auto max-h-96">
-                        <tr class="border-b border-gray-700">
+                        <tr v-if="employerPosts.length === 0">
+                            <td colspan="6" class="px-4 py-3 text-center text-gray-400">
+                                NO SAVED POSTS
+                            </td>
+                        </tr>
+                        <tr v-for="employerPost in employerPosts" class="border-b border-gray-700">
                             <th scope="row"
                                 class="px-4 py-3 font-medium text-white max-w-60 break-words whitespace-normal">
-                                Menager
+                                {{ employerPost.tittle }}
                             </th>
-                            <td class="px-4 py-3">Remote</td>
-                            <td class="px-4 py-3">20.10.2025</td>
-                            <td class="px-4 py-3">6</td>
-                            <td class="px-4 py-3">1500$</td>
+                            <td class="px-4 py-3">{{ employerPost.type }}</td>
+                            <td class="px-4 py-3">{{ formatDate(employerPost.expiration_date) }}</td>
+                            <td class="px-4 py-3">{{employerPost.nrWorkers}}</td>
+                            <td class="px-4 py-3">{{employerPost.salary}}</td>
                             <td class="px-4 py-3">
                                 <Link
+                                    :href="route('jobs.show', { id: employerPost.id })"
                                     class="underline text-blue-500 "
                                 >
                                     See More

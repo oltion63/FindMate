@@ -1,5 +1,17 @@
 <script setup lang="ts">
 import {Link} from "@inertiajs/vue3";
+
+const props = defineProps({
+    user: {
+        type: Object,
+    },
+});
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB");
+}
+const isProfileIncomplete = !props.user.phone || !props.user.birthday || !props.user.city || !props.user.address;
 </script>
 
 <template>
@@ -10,19 +22,20 @@ import {Link} from "@inertiajs/vue3";
     </span>
         <div class="pb-3 border-b border-amber-50 flex space-x-6 items-center mt-3">
 
-            <h2>Oltion Mustafa</h2>
+            <img :src="user.image.startsWith('http') ? user.image : '/storage/' + user.image" alt="" class="w-20 h-20 rounded-full object-cover">
+            <h2>{{ user.name }} {{ user.lastname }}</h2>
         </div>
         <div class="py-3 space-y-6 border-b border-amber-50">
-            <h2>Company: OM Company</h2>
-            <h2>Email: oltionmustafaa@gmail.com</h2>
-            <h2>Phone: 049388052</h2>
-            <h2>Birthday: 04.11.2002</h2>
-            <h2>City: Ferizaj</h2>
-            <h2>Address: Thimi Mitko</h2>
-            <h2>Joined At: 26.04.2025</h2>
+            <h2 v-if="$page.props.auth.user.company" >Company: {{ user.company?.name ?? 'No company'}}</h2>
+            <h2>Email: {{ user.email }}</h2>
+            <h2>Phone: {{ user.phone }}</h2>
+            <h2>Birthday: {{ formatDate(user.birthday) }}</h2>
+            <h2>City: {{ user.city?.name }}</h2>
+            <h2>Address: {{ user.address ?? 'No Address' }}</h2>
+            <h2>Joined At: {{ formatDate(user.created_at) }}</h2>
         </div>
         <div class="pt-6">
-            <Link class="flex space-x-2 w-fit">
+            <Link :href="route('profile.edit')" class="flex space-x-2 w-fit">
                 <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

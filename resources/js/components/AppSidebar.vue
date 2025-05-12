@@ -8,15 +8,18 @@ import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
+
+
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+        role: ['admin'],
     },
     {
         title: 'Profile',
-        href: '/profile',
+        href: '/profilePage',
         icon: LayoutGrid,
     },
 ];
@@ -32,7 +35,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard')">
+                        <Link :href="route('profilePage')">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
@@ -41,7 +44,7 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain :items="mainNavItems"  />
         </SidebarContent>
 
         <SidebarFooter>

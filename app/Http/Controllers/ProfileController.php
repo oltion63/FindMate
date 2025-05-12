@@ -46,7 +46,7 @@ class ProfileController extends Controller
         $employerPosts = Post::with(['category', 'location', 'company'])
             ->where('user_id', $currentUserId, )->get();
 
-        return Inertia::render('Profile/ProfilePage', [
+        return Inertia::render('profile/profile', [
             'applications' => $applications,
             'employeeApplications' => $employeeApplications,
             'company' => $company,
