@@ -117,7 +117,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </Link>
                 <Link
                     v-if="company && company.length !== 0 && $page.props.auth.user.role === 'employer'"
-                    :href="route('profile.edit')+'#companyImg'"
+                    :href="route('editCompany')"
                     class="text-white bg-gradient-to-br from-gray-800 to-blue-500 hover:bg-gradient-to-bl hover:scale-105 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                     Edit Company

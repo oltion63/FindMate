@@ -58,6 +58,14 @@ Route::middleware('auth')->controller(ProfileController::class)->group(function 
     Route::delete('/profile',  'destroy')->name('profile.destroy');
     Route::post('profile/update-image',  'updateImage')->name('updateUserImage');
 });
+Route::middleware(['auth'])->controller(CompanyController::class)->group(function () {
+    Route::get('settings/company', 'edit')->name('editCompany');
+    Route::get('/createCompany', 'create')->name('createCompany');
+    Route::post('/storeCompany', 'store')->name('storeCompany');
+    Route::patch('profile/{company}/update', 'update')->name('updateCompany');
+    Route::post('profile/{company}/update-image', 'updateImage')->name('updateCompanyImage');
+    Route::delete('profile/{company}/delete', 'deleteCompany')->name('deleteCompany');
+});
 
 
 require __DIR__.'/settings.php';
