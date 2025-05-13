@@ -9,7 +9,7 @@ import {ref} from "vue";
 import EmployeeApplications from "@/components/profile/EmployeeApplications.vue";
 import UploadCVModal from "@/pages/profile/UploadCVModal.vue";
 import ShowCVModal from "@/pages/profile/ShowCVModal.vue";
-import ShowCvEmployer from "@/pages/profile/ShowCvEmployer.vue";
+import ShowCVEmployer from "@/pages/profile/ShowCVEmployer.vue";
 import EditCVModal from "@/pages/profile/EditCVModal.vue";
 import SavedPosts from "@/components/profile/SavedPosts.vue";
 import EmployerPosts from "@/components/profile/EmployerPosts.vue";
@@ -146,7 +146,7 @@ const breadcrumbs: BreadcrumbItem[] = [
             <UploadCVModal  v-if="showModal" :show="showModal" @close="showModal = false" />
             <EditCVModal :currentCV="currentCV" v-if="showEditModal"  :show="showEditModal"  @close="showEditModal=false"></EditCVModal>
             <ShowCVModal :user="user" v-if="isCvVisible" @close="closeCv"/>
-            <ShowCvEmployer v-if="isEmCvVisible" :selectedCv="selectedCv" @close="closeCvModal"/>
+            <ShowCVEmployer v-if="isEmCvVisible" :selectedCv="selectedCv" @close="closeCvModal"/>
 
             <div class="lg:flex justify-center gap-9">
                 <UserInfo :user="user"/>
