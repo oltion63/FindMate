@@ -138,6 +138,7 @@ const submit = () => {
                             </div>
                         </form>
                     </div>
+                    <div class="w-px bg-gray-300 mx-2"></div>
                     <div class="w-3/4 mx-auto">
                         <form @submit.prevent="updateImage" >
                             <div class="flex flex-col justify-center items-center">

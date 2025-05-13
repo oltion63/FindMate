@@ -3,9 +3,14 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import {Head, Link} from "@inertiajs/vue3";
 import UserInfo from "@/components/profile/UserInfo.vue";
 import UserStats from "@/components/profile/UserStats.vue";
+import CompanyModal from "@/pages/jobs/CompanyModal.vue";
 import UserApplications from "@/components/profile/UserApplications.vue";
 import {ref} from "vue";
 import EmployeeApplications from "@/components/profile/EmployeeApplications.vue";
+import UploadCVModal from "@/pages/profile/UploadCVModal.vue";
+import ShowCVModal from "@/pages/profile/ShowCVModal.vue";
+import ShowCvEmployer from "@/pages/profile/ShowCvEmployer.vue";
+import EditCVModal from "@/pages/profile/EditCVModal.vue";
 import SavedPosts from "@/components/profile/SavedPosts.vue";
 import EmployerPosts from "@/components/profile/EmployerPosts.vue";
 import type { BreadcrumbItem } from '@/types';
@@ -137,6 +142,12 @@ const breadcrumbs: BreadcrumbItem[] = [
                     Edit CV
                 </button>
             </div>
+            <CompanyModal :company="company" v-if="isModalVisible" @close="closeModal"/>
+            <UploadCVModal  v-if="showModal" :show="showModal" @close="showModal = false" />
+            <EditCVModal :currentCV="currentCV" v-if="showEditModal"  :show="showEditModal"  @close="showEditModal=false"></EditCVModal>
+            <ShowCVModal :user="user" v-if="isCvVisible" @close="closeCv"/>
+            <ShowCvEmployer v-if="isEmCvVisible" :selectedCv="selectedCv" @close="closeCvModal"/>
+
             <div class="lg:flex justify-center gap-9">
                 <UserInfo :user="user"/>
                 <div class="w-full" id="right-side">
