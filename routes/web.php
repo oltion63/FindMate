@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\GoogleAuthController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -67,6 +68,9 @@ Route::middleware(['auth'])->controller(CompanyController::class)->group(functio
     Route::delete('profile/{company}/delete', 'deleteCompany')->name('deleteCompany');
 });
 
+
+Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleAuthController::class, 'googleCallback'])->name('auth.google.callback');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

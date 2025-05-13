@@ -1,14 +1,9 @@
-<script setup lang="ts">
-import AuthLayout from '@/layouts/auth/AuthSimpleLayout.vue';
-
-defineProps<{
-    title?: string;
-    description?: string;
-}>();
+<script setup>
+import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <AuthLayout :title="title" :description="description">
-        <slot />
-    </AuthLayout>
+    <div class="flex min-h-screen px-4 flex-col items-center bg-gradient-to-tr from-cyan-100 to-white pt-6 sm:justify-center sm:pt-0">
+            <slot />
+        </div>
 </template>
