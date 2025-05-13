@@ -13,7 +13,7 @@ import AppLogo from './AppLogo.vue';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/admin/dashboard',
         icon: LayoutGrid,
         role: ['admin'],
     },
@@ -21,6 +21,7 @@ const mainNavItems: NavItem[] = [
         title: 'Profile',
         href: '/profilePage',
         icon: LayoutGrid,
+        role: ['employer', 'employee'],
     },
     {
         title: 'Jobs',
