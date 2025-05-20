@@ -16,7 +16,7 @@ const props = defineProps({
         default: false,
     },
 })
-console.log('array: ', props.posts)
+
 
 function truncate(text, length) {
     if (!text) return '';

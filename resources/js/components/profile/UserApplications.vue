@@ -15,7 +15,7 @@ const props = defineProps({
 const form = useForm({
     status: '',
 })
-console.log(props.applications)
+
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-GB");

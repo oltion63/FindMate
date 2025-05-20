@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Notifications;
 use App\Models\CV;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,10 +21,15 @@ class CvController extends Controller
         } else {
             return redirect()->back()->with('error', 'No valid file uploaded.');
         }
-        Cv::create([
+        $cv = Cv::create([
             'file' => $path,
             'user_id' => $request->user_id,
         ]);
+
+        $employee = $cv->user_id;
+        $message = 'You have successfully uploaded your CV.';
+        event(new Notifications($message, $employee));
+
         return redirect()->back()->with('success', 'File uploaded.');
     }
     public function updateCV(Request $request)
@@ -54,6 +60,10 @@ class CvController extends Controller
         $cv->update([
             'file' => $filePath,
         ]);
+
+        $employee = $cv->user_id;
+        $message = 'You have successfully updated your CV.';
+        event(new Notifications($message, $employee));
 
         return back()->with('success', 'Your CV has been updated successfully.');
     }

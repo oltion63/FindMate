@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Notifications;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Company;
@@ -154,6 +155,10 @@ class PostController extends Controller
             'expiration_date'=> $request->expiration_date,
         ]);
 
+        $employer = $job->user_id;
+        $message = 'Your post ' . $job->tittle . ' has been created successfully';
+        event(new Notifications($message, $employer));
+
         return redirect(route('jobs.index'))->with('success', 'Job created successfully');
     }
 
@@ -200,6 +205,10 @@ class PostController extends Controller
             'expiration_date' => 'required',
         ]);
         $post->update($request->except(['user_id', 'company_id']));
+
+        $employer = $post->user_id;
+        $message = 'Your post ' . $post->tittle . ' has been updated successfully';
+        event(new Notifications($message, $employer));
 
         return redirect(route('jobs.index'))->with('success', 'Job information updated successfully');
     }
