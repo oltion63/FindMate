@@ -59,9 +59,6 @@ const toggleFilter = () =>{
     filterActive.value = !filterActive.value;
 }
 
-console.log('filter: ', filterActive )
-
-
 </script>
 
 <template>

@@ -138,19 +138,11 @@ const submit = () => {
                             </div>
                         </div>
 
-                        <div id="row3" class="flex justify-between space-x-2">
-                            <div class="grid gap-2 w-1/2">
-                                <Label for="address">Address</Label>
-                                <Input id="address" class="mt-1 block w-full" v-model="form.address" required autocomplete="address" placeholder="Address" />
-                                <InputError class="mt-2" :message="form.errors.address" />
-                            </div>
-
-                            <div class="grid gap-2 w-1/2">
+                            <div class="grid gap-2">
                                 <Label for="birthday">Birthday</Label>
                                 <Input id="birthday" class="mt-1 block w-full" v-model="form.birthday" required autocomplete="birthday" placeholder="Birthday" type="date" />
                                 <InputError class="mt-2" :message="form.errors.birthday" />
                             </div>
-                        </div>
 
                         <div id="row4" class="flex justify-between space-x-2">
                             <div class="grid gap-2 w-1/2">

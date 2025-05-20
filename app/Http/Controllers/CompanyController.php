@@ -48,6 +48,9 @@ class CompanyController extends Controller
             'email' => $request->email,
         ]);
 
+        $employer = $company->user_id;
+        $message = 'Your Company '. $company->name  .' has been created!';
+
         return redirect(route('profilePage'))->with('success', 'Company created.');
     }
     public function edit(){
