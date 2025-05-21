@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {Head, useForm} from "@inertiajs/vue3";
 import AppLayout from "@/layouts/AppLayout.vue";
 import JobsTextInput from "@/components/jobs/JobsTextInput.vue";
@@ -7,6 +7,7 @@ import {ref} from "vue";
 import NumberInput from "@/components/jobs/NumberInput.vue";
 import InputLabel from "@/components/InputLabel.vue";
 import InputError from "@/components/InputError.vue";
+import type { BreadcrumbItem } from '@/types/index.js';
 
 const input = ref('');
 
@@ -44,11 +45,18 @@ const submit = () => {
     form.post(route('jobs.store'))
 };
 
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Add Job',
+        href: '/jobs.index',
+    },
+];
+
 </script>
 
 <template>
     <Head title="Add Jobs"/>
-    <AppLayout>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <main class="p-4">
             <div class="py-4 px-4 mx-auto max-w-2xl lg:py-8 bg-white border-gray-200 border rounded-lg mt-16">
                 <h2 class="mb-4 text-xl font-bold text-gray-900 ">Add a new job</h2>
