@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\CvController;
@@ -67,6 +69,8 @@ Route::middleware(['auth'])->controller(CompanyController::class)->group(functio
     Route::delete('profile/{company}/delete', 'deleteCompany')->name('deleteCompany');
 });
 
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::patch('/markAsRead', [NotificationsController::class, 'markAsRead'])->name('markAsRead');
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'googleCallback'])->name('auth.google.callback');

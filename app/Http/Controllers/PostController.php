@@ -42,7 +42,7 @@ class PostController extends Controller
                         [$min, $max] = explode('-', $range);
                         $q->orWhereBetween('salary', [(int) $min, (int) $max]);
                     } elseif (str_starts_with($range, '+')) {
-                        $min = str_replace('+', '', $range);
+                        $min = str_replace(['+', '$'], '', $range);
                         $q->orWhere('salary', '>=', (int) $min);
                     }
                 }

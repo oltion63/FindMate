@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
                 // Query notifications table where user_id = auth()->id()
                 return DB::table('notifications')
                     ->where('user_id', $userId)
+                    ->where('is_read', 0)
                     ->orderBy('created_at', 'desc')
                     ->limit(20)
                     ->get(['id', 'message', 'created_at'])
