@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -20,22 +21,18 @@ class PostController extends Controller
         $categories = Category::all();
         $cities = City::all();
 
-        $query = Post::with(['category', 'location', 'company']);
-
+        $baseQuery = Post::query();
         if ($request->has('location') && $request->location) {
-            $query->where('location_id', $request->location);
+            $baseQuery->where('location_id', $request->location);
         }
-
         if ($request->has('category') && $request->category) {
-            $query->where('category_id', $request->category);
+            $baseQuery->where('category_id', $request->category);
         }
-
         if ($request->has('type') && $request->type) {
-            $query->whereIn('type', $request->type);
+            $baseQuery->whereIn('type', $request->type);
         }
-
         if ($request->has('salary') && $request->salary) {
-            $query->where(function ($q) use ($request) {
+            $baseQuery->where(function ($q) use ($request) {
                 foreach ($request->salary as $range) {
                     $range = str_replace('$', '', $range);
                     if (str_contains($range, '-')) {
@@ -50,7 +47,7 @@ class PostController extends Controller
         }
         if ($request->has('search') && $request->search) {
             $searchTerm = $request->search;
-            $query->where(function ($q) use ($searchTerm) {
+            $baseQuery->where(function ($q) use ($searchTerm) {
                 $q->where('tittle', 'LIKE', "%{$searchTerm}%")
                     ->orWhereHas('location', function ($q) use ($searchTerm) {
                         $q->where('name', 'LIKE', "%{$searchTerm}%");
@@ -60,6 +57,22 @@ class PostController extends Controller
                     });
             });
         }
+
+        $isPremium = false;
+        if (Auth::check()) {
+            $user = Auth::user();
+            $isPremium = ($user->is_premium || $user->role === 'admin');
+        }
+
+        if (!$isPremium) {
+            $baseQuery->where('posts.created_at', '<=', now()->subHours(24));
+        }
+
+        $query = $baseQuery->join('users', 'posts.user_id', '=', 'users.id')
+            ->orderByRaw('CASE WHEN users.is_premium = 1 THEN 0 ELSE 1 END')
+            ->select('posts.*');
+
+        // Sorting filter from request
         if ($request->has('sort')) {
             switch ($request->sort) {
                 case 'newest':
@@ -82,10 +95,12 @@ class PostController extends Controller
                     break;
             }
         } else {
-            $query->orderBy('created_at', 'desc');
+            $query->orderByDesc('posts.created_at'); // Default sort if none selected
         }
-        $posts = $query->paginate(7);
-        $savedPost = SavedPosts::where('user_id', auth()->id())
+
+        $posts = Post::with(['category', 'location', 'company', 'user'])->fromSub($query, 'posts')->paginate(7);
+
+        $savedPost = SavedPosts::where('user_id', Auth::id())
             ->get(['post_id', 'id'])
             ->map(function ($saved) {
                 return [
@@ -98,30 +113,31 @@ class PostController extends Controller
             'cities' => $cities,
             'posts' => $posts,
             'savedPost' => $savedPost,
+            'isPremium' => $isPremium,
         ]);
     }
 
     public function create(){
         $cities = City::all();
         $categories = Category::all();
-        $kompania = Company::where('user_id', auth()->id())->first();
+        $kompania = Company::where('user_id', Auth::id())->first();
 
         if (!$kompania) {
             return redirect()->route('profilePage')->with('error', 'You don`t have a company added');
         }
-        if (auth()->user()->role !== 'employer') {
+        if (Auth::user()->role !== 'employer') {
             return redirect()->route('profilePage')->with('error', 'You aren`t registered as an employer');
         }
 
         return Inertia::render('jobs/CreateJob', [
-            'authUser' => auth()->id(),
+            'authUser' => Auth::id(),
             'cities' => $cities,
             'categories' => $categories,
             'kompania' => $kompania,
         ]);
     }
     public function store(Request $request){
-        $user = auth()->user();
+        $user = Auth::user();
         $companyExists = Company::where('user_id', $user->id)->exists();
         if (!$companyExists) {
             return redirect()->back()->with('error', 'You don`t have a company');
@@ -163,10 +179,10 @@ class PostController extends Controller
     }
 
     public function show($id){
-        $user = User::with(['city', 'cv'])->where('id', auth()->id())->first();
+        $user = User::with(['city', 'cv'])->where('id', Auth::id())->first();
         $post = Post::with(['category', 'location', 'company' ])->find($id);
         $savedPost = SavedPosts::where('post_id', $id)
-            ->where('user_id', auth()->id())
+            ->where('user_id', Auth::id())
             ->pluck('id')
             ->first();
         return Inertia::render('jobs/ShowJobs', [
@@ -181,12 +197,12 @@ class PostController extends Controller
         $cities = City::all();
         $categories = Category::all();
 
-        if (auth()->id() !== $post->user_id) {
+        if (Auth::id() !== $post->user_id) {
             return redirect()->route('jobs.index')->with('error', 'You don`t have permission to access this page');
         }
 
         return Inertia::render('jobs/EditJob', [
-            'authUser' => auth()->id(),
+            'authUser' => Auth::id(),
             'post' => $post,
             'cities' => $cities,
             'categories' => $categories
@@ -215,7 +231,7 @@ class PostController extends Controller
 
     public function destroy($id){
         $post = Post::findOrFail($id);
-        if (auth()->id() !== $post->user_id) {
+        if (Auth::id() !== $post->user_id) {
             return redirect()->route('jobs.index')->with('error', 'You don`t have permission to access this page');
         }
         $post->delete();
@@ -237,8 +253,8 @@ class PostController extends Controller
     }
     public function deleteSaved($id)
     {
-        $savedPost = SavedPosts::where('user_id', auth()->id())->find($id);
-        if (auth()->id() !== $savedPost->user_id) {
+        $savedPost = SavedPosts::where('user_id', Auth::id())->find($id);
+        if (Auth::id() !== $savedPost->user_id) {
             return redirect()->route('jobs.index')->with('error', 'You don`t have permission to access this page');
         }
         $savedPost->delete();

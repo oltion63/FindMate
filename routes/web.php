@@ -11,6 +11,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\PremiumController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -67,6 +68,11 @@ Route::middleware(['auth'])->controller(CompanyController::class)->group(functio
     Route::patch('profile/{company}/update', 'update')->name('updateCompany');
     Route::post('profile/{company}/update-image', 'updateImage')->name('updateCompanyImage');
     Route::delete('profile/{company}/delete', 'deleteCompany')->name('deleteCompany');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/stripe-checkout', [PremiumController::class, 'checkout'])->name('premium.checkout');
+    Route::get('/premium-success', [PremiumController::class, 'success'])->name('premium.success');
 });
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');

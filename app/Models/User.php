@@ -31,6 +31,7 @@ class User extends Authenticatable
         'role',
         'google_id',
         'email_verified_at',
+        'is_premium',
     ];
 
     public function jobs(){
@@ -50,6 +51,12 @@ class User extends Authenticatable
     }
     public function savedPosts(){
         return $this->hasMany(Post::class, 'user_id');
+    }
+
+    
+    public function isPremium(): bool
+    {
+        return (bool) $this->is_premium;
     }
 
     /**

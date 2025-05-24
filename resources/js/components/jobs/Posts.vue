@@ -54,8 +54,11 @@ const deleteSaved = (savedPostId) => {
                     <img :src="'storage/'+ post.company.image" class="w-16 h-16 rounded border border-gray-200" alt="">
 
                     <div class="space-y-2">
-                    <span class="font-bold text-lg md:text-xl break-words">
+                    <span class="font-bold text-lg md:text-xl break-words flex items-center gap-1">
                         {{ truncate(post.tittle, 20) }}
+                        <template v-if="post.user && post.user.is_premium">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700" xmlns="http://www.w3.org/2000/svg" class="ml-1"><path d="M12 2l2.39 7.19H22l-5.8 4.21L17.58 22 12 17.77 6.42 22l1.38-8.6L2 9.19h7.61z"/></svg>
+                        </template>
                     </span>
                         <section class="md:space-x-8 text-xs md:text-base grid grid-cols-2 gap-x-8 md:flex whitespace-nowrap items-center">
                         <span class="flex items-center gap-x-1">
