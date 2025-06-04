@@ -14,7 +14,6 @@ import EditCVModal from "@/pages/profile/EditCVModal.vue";
 import SavedPosts from "@/components/profile/SavedPosts.vue";
 import EmployerPosts from "@/components/profile/EmployerPosts.vue";
 import type { BreadcrumbItem } from '@/types';
-import ChatBox from '@/components/ChatBox.vue';
 import axios from 'axios';
 
 
@@ -172,29 +171,6 @@ const breadcrumbs: BreadcrumbItem[] = [
                     <SavedPosts v-if="$page.props.auth.user.role === 'employee'" :savedPosts="savedPosts"/>
                     <EmployerPosts v-if="$page.props.auth.user.role === 'employer'" :employerPosts="employerPosts"/>
                 </div>
-            </div>
-            <div class="mt-10 px-4">
-                <!-- Employer chat select + chat box -->
-                <template v-if="$page.props.auth.user.role === 'employer'">
-                    <label for="selectReceiver" class="block mb-2 font-semibold">Select Employee to Chat:</label>
-                    <select
-                        id="selectReceiver"
-                        v-model="selectedReceiverId"
-                        class="border p-2 rounded w-full max-w-xs mb-4"
-                    >
-                        <option disabled value="">-- Select Employee --</option>
-                        <option v-for="employee in employees" :key="employee.id" :value="employee.id">
-                            {{ employee.name }}
-                        </option>
-                    </select>
-
-                    <ChatBox v-if="selectedReceiverId" :receiverId="selectedReceiverId" />
-                </template>
-
-                <!-- Employee sees chat with employer -->
-                <template v-if="$page.props.auth.user.role === 'employee' && company && company.user_id">
-                    <ChatBox :receiverId="company.user_id" />
-                </template>
             </div>
         </main>
     </AppLayout>

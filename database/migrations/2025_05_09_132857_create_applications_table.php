@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'user_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(Post::class, 'post_id')->constrained()->onDelete('cascade');
+            $table->foreignId('room_id')->nullable()->constrained('rooms')->onDelete('set null');
             $table->enum('status', ['pending', 'rejected', 'accepted'])->default('pending');
             $table->timestamps();
         });
