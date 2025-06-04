@@ -8,4 +8,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('notifications.{userId}', function ($user, $userId) {
     return (int) $user->id === (int) $userId;
 });
+Broadcast::channel('chat.room.{roomId}', function ($user, $roomId) {
+    return $user->rooms()->where('rooms.id', $roomId)->exists();
+});
 

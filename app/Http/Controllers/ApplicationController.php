@@ -10,8 +10,10 @@ use App\Jobs\SendRejectedMail;
 use App\Mail\NewApplication;
 use App\Models\Application;
 use App\Models\Post;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
@@ -76,18 +78,40 @@ class ApplicationController extends Controller
         return redirect()->back()->with('success', 'Application has been deleted');
     }
 
-    public function accept($id){
+    public function accept($id)
+    {
         $application = Application::findOrFail($id);
+
         if ($application->status === 'pending' || $application->status === 'rejected') {
             $application->update(['status' => 'accepted']);
         }
+
         SendAcceptedMail::dispatch($application)->onQueue('queue');
         $post = $application->post;
         $applicant = $application->user->id;
-        $message = 'Your application for '.$post->tittle . ' has been accepted';
+        $message = 'Your application for ' . $post->tittle . ' has been accepted';
         event(new Notifications($message, $applicant));
 
-        return redirect()->back()->with('success', 'Application accepted');
+        $employer = Auth::user();
+        $employee = $application->user;
+
+        $existingRoom = Room::whereHas('users', function ($q) use ($employer) {
+            $q->where('user_id', $employer->id);
+        })->whereHas('users', function ($q) use ($employee) {
+            $q->where('user_id', $employee->id);
+        })->first();
+
+        if (!$existingRoom) {
+            $room = Room::create([
+                'title' => 'Chat: ' . $employer->name . ' & ' . $employee->name,
+                'applicant_id'=> $employee->id,
+            ]);
+
+            $room->users()->attach([$employer->id, $employee->id]);
+
+        }
+
+        return redirect()->back()->with('success', 'Application accepted and chat room created');
     }
     public function reject($id){
         $application = Application::findOrFail($id);

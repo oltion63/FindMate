@@ -47,6 +47,7 @@ const openModal = (cvUrl, value) => {
                             <th scope="col" class="px-4 py-3">Applicant CV</th>
                             <th scope="col" class="px-4 py-3">Accept</th>
                             <th scope="col" class="px-4 py-3">Reject</th>
+                            <th scope="col" class="px-4 py-3">Chat</th>
                         </tr>
                         </thead>
                         <tbody class="max-h-96 overflow-y-auto">
@@ -95,6 +96,16 @@ const openModal = (cvUrl, value) => {
                                 <span v-if="application.status === 'rejected'" class="text-red-500">
                                     Rejected
                                 </span>
+                            </td>
+                            <td class="px-4 py-3">
+                                <a
+                                    v-if="application.room_id"
+                                    :href="`/chat/room/${application.room_id}`"
+                                    class="text-blue-500 underline"
+                                >
+                                    Open Chat
+                                </a>
+                                <span v-else class="text-gray-500">Not available</span>
                             </td>
                         </tr>
 

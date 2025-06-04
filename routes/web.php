@@ -12,6 +12,7 @@ use App\Http\Controllers\CvController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PremiumController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -81,5 +82,11 @@ Route::patch('/markAsRead', [NotificationsController::class, 'markAsRead'])->nam
 Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'googleCallback'])->name('auth.google.callback');
 
+
+Route::middleware('auth')->group(function () {
+    Route::get('/chat/room/{id}', [MessageController::class, 'room']);
+    Route::get('/chat/messages', [MessageController::class, 'messages']);
+    Route::post('/chat/message', [MessageController::class, 'sendMessage']);
+});
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

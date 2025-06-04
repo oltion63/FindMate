@@ -19,6 +19,11 @@ export default defineConfig({
                     base: null,
                     includeAbsolute: false,
                 },
+                compilerOptions: {
+                    isCustomElement: tagName => {
+                        return tagName === 'vue-advanced-chat' || tagName === 'emoji-picker'
+                    }
+                },
             },
         }),
     ],
