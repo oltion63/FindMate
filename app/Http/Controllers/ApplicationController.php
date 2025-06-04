@@ -95,21 +95,15 @@ class ApplicationController extends Controller
         $employer = Auth::user();
         $employee = $application->user;
 
-        $existingRoom = Room::whereHas('users', function ($q) use ($employer) {
-            $q->where('user_id', $employer->id);
-        })->whereHas('users', function ($q) use ($employee) {
-            $q->where('user_id', $employee->id);
-        })->first();
+        $room = Room::create([
+            'title' => 'Chat: ' . $post->tittle . ' - ' . $employer->name . ' & ' . $employee->name,
+            'applicant_id' => $employee->id,
+        ]);
 
-        if (!$existingRoom) {
-            $room = Room::create([
-                'title' => 'Chat: ' . $employer->name . ' & ' . $employee->name,
-                'applicant_id'=> $employee->id,
-            ]);
+        $room->users()->attach([$employer->id, $employee->id]);
 
-            $room->users()->attach([$employer->id, $employee->id]);
-
-        }
+        $application->room_id = $room->id;
+        $application->save();
 
         return redirect()->back()->with('success', 'Application accepted and chat room created');
     }

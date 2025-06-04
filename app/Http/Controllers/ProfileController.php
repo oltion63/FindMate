@@ -46,16 +46,7 @@ class ProfileController extends Controller
             ->where('user_id', $currentUserId, )->get();
         $employerPosts = Post::with(['category', 'location', 'company'])
             ->where('user_id', $currentUserId, )->get();
-        foreach ($applications as $application) {
-            $employerId = auth()->id();
-            $employeeId = $application->user_id;
 
-            $room = Room::whereHas('users', fn($q) => $q->where('user_id', $employerId))
-                ->where('applicant_id', $employeeId)
-                ->first();
-
-            $application->room_id = $room?->id;
-        }
 
         return Inertia::render('profile/profile', [
             'applications' => $applications,

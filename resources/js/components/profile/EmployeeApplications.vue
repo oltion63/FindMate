@@ -65,6 +65,16 @@ function formatDate(dateString) {
                                 >
                                     Cancel
                                 </button></td>
+                            <td class="px-4 py-3">
+                                <a
+                                    v-if="application.room_id"
+                                    :href="`/chat/room/${application.room_id}`"
+                                    class="text-blue-500 underline"
+                                >
+                                    Open Chat
+                                </a>
+                                <span v-else class="text-gray-500">Not available</span>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
