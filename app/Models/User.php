@@ -53,10 +53,20 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'user_id');
     }
 
-    
+
     public function isPremium(): bool
     {
         return (bool) $this->is_premium;
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class, 'room_user');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 
     /**
