@@ -19,7 +19,7 @@ class MessageController extends Controller
             abort(403, 'You are not part of this chat room.');
         }
         $authUser = auth()->user()->only(['id', 'name', 'email', 'role', 'image']);
-        return Inertia::render('Chat', [
+        return Inertia::render('chat/Chat', [
             'room' => $room,
             'auth' => [
                 'user' => $authUser,
@@ -78,6 +78,29 @@ class MessageController extends Controller
 
         return response()->json([
             'message' => $message,
+        ]);
+    }
+
+    public function userRooms()
+    {
+        $user = Auth::user();
+        $rooms = $user->rooms()->select('rooms.id', 'rooms.title')->get();
+
+        return response()->json([
+            'rooms' => $rooms,
+        ]);
+    }
+
+    public function roomsPage()
+    {
+        $user = auth()->user();
+        $rooms = $user->rooms()->select('rooms.id', 'rooms.title')->get();
+
+        return Inertia::render('chat/ChatRoomsPage', [
+            'rooms' => $rooms,
+            'auth' => [
+                'user' => $user->only(['id', 'name', 'email', 'role', 'image']),
+            ],
         ]);
     }
 }

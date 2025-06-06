@@ -7,6 +7,7 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid, User, Briefcase, PlusCircle } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import { MessageCircle } from 'lucide-vue-next';
 
 const mainNavItems: NavItem[] = [
     {
@@ -31,6 +32,12 @@ const mainNavItems: NavItem[] = [
         href: '/jobs/create',
         icon: PlusCircle,
         role: ['employer'],
+    },
+    {
+        title: 'Chats',
+        href: '/chat/rooms',
+        icon: MessageCircle,
+        role: ['employer', 'employee'],
     },
 
 ];
