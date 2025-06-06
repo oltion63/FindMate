@@ -87,6 +87,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/room/{id}', [MessageController::class, 'room']);
     Route::get('/chat/messages', [MessageController::class, 'messages']);
     Route::post('/chat/message', [MessageController::class, 'sendMessage']);
+    Route::get('/chat/list', [MessageController::class, 'userRooms']);
+    Route::get('/chat/rooms', [MessageController::class, 'roomsPage']);
 });
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
