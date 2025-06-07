@@ -79,11 +79,11 @@ const submit = () => {
                     No company added
                 </div>
 
-                <div v-else class="flex justify-between space-x-10">
+                <div v-else class="md:flex justify-between md:space-x-10 md:mt-8">
                     <div class="flex w-full flex-col space-y-6">
                         <HeadingSmall title="Company information" description="Update your company information" />
 
-                        <form @submit.prevent="submit" class="space-y-6">
+                        <form @submit.prevent="submit" class="space-y-6 pb-4 border-b border-gray-300 md:pb-0 md:border-b-0">
                             <div class="grid gap-2">
                                 <Label for="name">Name</Label>
                                 <Input id="name" class="mt-1 block w-full" v-model="form.name" required autocomplete="name" placeholder="Full name" />
@@ -139,8 +139,8 @@ const submit = () => {
                         </form>
                     </div>
                     <div class="w-px bg-gray-300 mx-2"></div>
-                    <div class="w-3/4 mx-auto">
-                        <form @submit.prevent="updateImage" >
+                    <div class="md:w-3/4 mx-auto">
+                        <form @submit.prevent="updateImage" class="border-b pb-4 border-gray-300 " >
                             <div class="flex flex-col justify-center items-center">
                                 <div v-if="imageSrc" class="mt-2">
                                     <img

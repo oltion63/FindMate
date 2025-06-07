@@ -51,7 +51,7 @@ const previewImage = (event) => {
 <template>
     <Head title="Add Jobs"/>
     <AppLayout>
-        <div class="py-20 px-4">
+        <div class="md:py-20 px-4">
             <div class="py-4 px-8 mx-auto max-w-2xl lg:py-8 bg-white border-gray-200 border rounded-lg mt-4 ">
                 <h2 class="mb-4 text-xl font-bold text-gray-900 ">Add your company</h2>
                 <form @submit.prevent="submit">

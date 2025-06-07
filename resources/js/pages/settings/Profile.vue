@@ -83,9 +83,9 @@ const submit = () => {
         <Head title="Profile settings" />
 
         <SettingsLayout>
-            <div class="flex justify-between space-x-6">
-                <div class="flex flex-col space-y-6">
-                    <HeadingSmall title="Profile information" description="Update your name and email address" />
+            <div class="md:flex justify-between md:space-x-6 space-y-4">
+                <div class="flex flex-col space-y-6 pb-4 border-b border-gray-300 md:pb-0 md:border-b-0">
+                    <HeadingSmall title="Profile information" description="Update your personal information" />
 
                     <form @submit.prevent="submit" class="space-y-6">
                         <div id="row1" class="flex justify-between space-x-2">
@@ -202,10 +202,11 @@ const submit = () => {
 
                 <div class="w-px bg-gray-300 mx-2"></div>
 
-                <div class="w-1/2 mx-auto">
+                <div class="w-full md:w-1/2 mx-auto">
                     <form
                         @submit.prevent="imgform.post(route('updateUserImage'))"
                         enctype="multipart/form-data"
+                        class="border-b border-gray-300 pb-4"
                     >
                         <div class="flex flex-col justify-center items-center">
                             <!-- Preview of the current or selected image -->
@@ -240,7 +241,7 @@ const submit = () => {
                             </button>
                         </div>
                     </form>
-                    <DeleteUser class="w-3/4 mx-auto mt-8" />
+                    <DeleteUser class="md:w-3/4 mx-auto mt-8" />
                 </div>
 
             </div>

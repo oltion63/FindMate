@@ -45,7 +45,7 @@ const deleteSaved = (savedPostId) => {
 
 <template>
 
-    <div v-for="post in posts.data" id="posts" class="bg-white rounded-lg mb-4 hover:shadow-xl transition w-64 md:w-full mx-auto">
+    <div v-for="post in posts.data" id="posts" class="bg-white rounded-lg mb-4 hover:shadow-xl border-gray-300 border transition w-64 md:w-full mx-auto">
         <Link
             :href="route('jobs.show', { id: post.id })"
         >
@@ -54,11 +54,11 @@ const deleteSaved = (savedPostId) => {
                     <img :src="'storage/'+ post.company.image" class="w-16 h-16 rounded border border-gray-200" alt="">
 
                     <div class="space-y-2">
-                    <span class="font-bold text-lg md:text-xl break-words flex items-center gap-1">
-                        {{ truncate(post.tittle, 20) }}
-                        <template v-if="post.user && post.user.is_premium">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700" xmlns="http://www.w3.org/2000/svg" class="ml-1"><path d="M12 2l2.39 7.19H22l-5.8 4.21L17.58 22 12 17.77 6.42 22l1.38-8.6L2 9.19h7.61z"/></svg>
-                        </template>
+                    <span class="font-bold text-md md:text-xl flex items-center ">
+                        {{ truncate(post.tittle, 15) }}
+
+                        <svg v-if="post.user && post.user.is_premium" width="18" height="18" viewBox="0 0 24 24" fill="#FFD700" xmlns="http://www.w3.org/2000/svg" class="ml-1"><path d="M12 2l2.39 7.19H22l-5.8 4.21L17.58 22 12 17.77 6.42 22l1.38-8.6L2 9.19h7.61z"/></svg>
+
                     </span>
                         <section class="md:space-x-8 text-xs md:text-base grid grid-cols-2 gap-x-8 md:flex whitespace-nowrap items-center">
                         <span class="flex items-center gap-x-1">
@@ -160,9 +160,9 @@ const deleteSaved = (savedPostId) => {
                     {{ truncate(post.description, 80) }}
                 </p>
             </section>
-            <section class="w-full flex items-center justify-between text-gray-500 px-6 pb-4 mt-2">
+            <section class="w-full space-x-4 flex items-center justify-between text-gray-500 px-6 pb-4 mt-2">
             <span
-                class="px-4 md:px-8 bg-emerald-300 bg-opacity-50 py-0.5 rounded-lg text-emerald-900 text-center text-xs md:text-sm flex items-center md:text-md">
+                class="px-2 md:px-8 bg-emerald-300 bg-opacity-50 py-0.5 rounded-lg text-emerald-900 text-center text-xs md:text-sm flex items-center md:text-md">
                 {{post.category.name }}
             </span>
                 <span class="text-xs md:text-sm ">{{ formatTime(post.created_at) }}</span>
@@ -170,9 +170,9 @@ const deleteSaved = (savedPostId) => {
         </Link>
     </div>
 
-    <div v-if="posts.length === 0" class="bg-white rounded-lg mb-4 h-20 flex justify-center items-center ">
+    <div v-if="posts.data.length === 0" class="bg-white rounded-lg flex justify-center items-center w-full min-h-full ">
         <span v-if="searchQueryPerformed">NO RESULTS</span>
-        <span v-else>NO POSTS YET</span>
+        <span >NO POSTS YET</span>
     </div>
 
 </template>

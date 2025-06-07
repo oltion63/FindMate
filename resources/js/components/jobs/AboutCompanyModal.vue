@@ -19,7 +19,7 @@ const closeACModal = () => {
 
 <template>
     <div v-if="isACModalVisible" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4"  @click="closeACModal">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full h-96 overflow-y-auto lg:h-fit" @click.stop>
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full max-h-[90%] overflow-y-auto lg:h-fit" @click.stop>
             <div class="md:flex justify-between items-center">
                 <div class="flex justify-start items-center space-x-8">
                     <img :src="'/storage/'+ post.company.image" class="w-24 h-24 rounded object-cover" alt="">
@@ -39,7 +39,7 @@ const closeACModal = () => {
             </div>
             <div class="mt-8 pb-8">
                 <span class="text-lg font-bold">About Company:</span>
-                <p class="mt-2 mb-8 h-20">{{ post.company.description }}</p>
+                <p class="mt-2 mb-8">{{ post.company.description }}</p>
             </div>
             <div class="space-y-4 lg:space-y-0 lg:flex justify-between items-center">
                 <div class="space-y-2 lg:space-y-0 lg:flex justify-start lg:space-x-4">

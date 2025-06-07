@@ -53,7 +53,7 @@ Route::middleware('auth')->controller(ApplicationController::class)->group(funct
     Route::post('/storeApplication', 'store')->name('storeApplication');
     Route::post('/application/{application}/accept', 'accept')->name('application.accept');
     Route::post('/application/{application}/reject', 'reject')->name('application.reject');
-    Route::delete('/application/{id}/delete', 'delete')->name('application.delete');
+    Route::delete('/application/{application}/delete', 'delete')->name('application.delete');
 });
 
 Route::middleware('auth')->controller(ProfileController::class)->group(function () {

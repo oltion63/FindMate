@@ -5,6 +5,8 @@ import { Separator } from '@/components/ui/separator';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
 
+const UserRole = usePage().props.auth.user.role;
+
 const sidebarNavItems: NavItem[] = [
     {
         title: 'Profile',
@@ -18,10 +20,9 @@ const sidebarNavItems: NavItem[] = [
         title: 'Appearance',
         href: '/settings/appearance',
     },
-    {
-        title: 'Company',
-        href: '/settings/company',
-    },
+        ...(UserRole === 'employer'
+            ? [{ title: 'Company', href: '/settings/company' }]
+            : []),
 ];
 
 const page = usePage();
@@ -34,7 +35,7 @@ const currentPath = page.props.ziggy?.location ? new URL(page.props.ziggy.locati
         <Heading title="Settings" description="Manage your profile and account settings" />
 
         <div class="flex flex-col space-y-8 md:space-y-0 lg:flex-row lg:space-x-12 lg:space-y-0">
-            <aside class="w-full max-w-xl lg:w-48">
+            <aside class="w-full md:w-1/2 max-w-xl lg:w-48">
                 <nav class="flex flex-col space-x-0 space-y-1">
                     <Button
                         v-for="item in sidebarNavItems"

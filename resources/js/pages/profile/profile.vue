@@ -126,7 +126,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <main class="mx-auto">
-            <div class="flex justify-end items-end py-8">
+            <div class="flex justify-end items-end py-8 mx-4 xl:mx-0">
                 <Link
                     v-if="(!company || company.length === 0) && $page.props.auth.user.role === 'employer'"
                     :href="route('createCompany')"
@@ -162,7 +162,7 @@ const breadcrumbs: BreadcrumbItem[] = [
             <ShowCVModal :user="user" v-if="isCvVisible" @close="closeCv"/>
             <ShowCVEmployer v-if="isEmCvVisible" :selectedCv="selectedCv" @close="closeCvModal"/>
 
-            <div class="lg:flex justify-center gap-9">
+            <div class="lg:flex justify-center gap-9 mx-4 xl:mx-0 max-w-72 md:max-w-6xl">
                 <UserInfo :user="user"/>
                 <div class="w-full" id="right-side">
                     <UserStats :isModalVisible="isModalVisible" @update:isModalVisible="updateModalVisibility" :countApplications="countApplications" :countSaved="countSaved" :countApplied="countApplied" :countPosts="countPosts" :isCvVisible="isCvVisible" @update:isCvVisible="updateCvVisibility"/>

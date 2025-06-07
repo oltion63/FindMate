@@ -18,7 +18,7 @@ const closeModal = () => {
 
 <template>
     <div v-if="isModalVisible" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4"  @click="closeModal">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full h-fit" @click.stop>
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full max-h-[90%] overflow-y-auto" @click.stop>
             <div class="space-y-4 md:space-y-0 md:flex justify-between items-center">
                 <div class="flex justify-start items-center space-x-8">
                     <img :src="'/storage/'+ company.image" class="w-24 h-24 rounded object-cover" alt="">
@@ -38,7 +38,7 @@ const closeModal = () => {
             </div>
             <div class="mt-8">
                 <span class="text-lg">Description:</span>
-                <p class="mt-2 mb-8 h-20">{{ company.description }}</p>
+                <p class="mt-2 mb-8 ">{{ company.description }}</p>
             </div>
             <div class="space-y-4 md:space-y-0 md:flex justify-between items-center">
                 <div class="md:flex justify-start md:space-x-4">

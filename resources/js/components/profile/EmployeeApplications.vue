@@ -20,7 +20,7 @@ function formatDate(dateString) {
 <template>
     <div id="table1" >
         <div class="mx-auto max-w-screen-xl mt-9">
-            <div class="bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden rounded-lg">
+            <div class="bg-gray-800 relative shadow-md sm:rounded-lg overflow-x-auto w-full rounded-lg">
                 <div
                     class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <span class="font-bold text-white text-xl">Your Applications</span>
@@ -34,6 +34,7 @@ function formatDate(dateString) {
                             <th scope="col" class="px-4 py-3">Application Date</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3"></th>
+                            <th scope="col" class="px-4 py-3">Chat</th>
                         </tr>
                         </thead>
                         <tbody class="overflow-y-auto max-h-96">
@@ -57,10 +58,10 @@ function formatDate(dateString) {
                                 {{application.status}}
                             </td>
                             <td class="px-4 py-3 text-blue-500">
-                                <form id="delete" class="hidden" @submit.prevent="form.delete(route('application.delete', {id: application.id}))"></form>
+                                <form :id="'delete-' + application.id" class="hidden" @submit.prevent="form.delete(route('application.delete', {id: application.id}))"></form>
                                 <button
                                     type="submit"
-                                    form="delete"
+                                    :form="'delete-' + application.id"
                                     class="text-blue-500 "
                                 >
                                     Cancel
