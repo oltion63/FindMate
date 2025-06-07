@@ -177,7 +177,7 @@ onMounted(() => {
             <h2 class="text-xl font-semibold leading-tight text-gray-800">Dashboard</h2>
         </template>
 
-        <section class="space-y-4 md:space-y-0 md:grid md:grid-cols-4 gap-6 py-8 px-6">
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:max-w-6xl md:max-w-2xl lg:max-w-4xl max-w-xs w-full mx-auto px-4">
             <DashboardInfoCard>
                 <template #Information> Employers</template>
                 <template #icon>
@@ -227,7 +227,7 @@ onMounted(() => {
             </DashboardInfoCard>
         </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 xl:max-w-6xl max-w-xs md:max-w-2xl lg:max-w-4xl mx-auto px-4">
             <!-- Chart Section -->
             <div class="bg-gradient-to-br from-gray-100 to-gray-300 border border-gray-300
                 rounded-2xl shadow-lg p-6 flex justify-center items-center dark:bg-gray-800 dark:border-gray-700
@@ -275,18 +275,18 @@ onMounted(() => {
                 </p>
             </div>
         </section>
-        <div class="md:flex mx-6 md:space-x-6">
-            <div class="bg-gray-800 border border-gray-300 rounded-2xl shadow-lg p-6 w-full md:w-1/2 items-center space-y-4">
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 xl:max-w-6xl max-w-xs md:max-w-2xl lg:max-w-4xl mx-auto px-4">
+            <div class="bg-gray-800 border border-gray-300 rounded-2xl shadow-lg p-6 items-center space-y-4">
                 <span class="text-gray-50 text-2xl font-bold">Map of users</span>
                 <div ref="mapRef" class="w-full h-96 rounded-xl z-40"></div>
             </div>
-            <div id="postsPerDay" class="bg-gray-800 border border-gray-300 rounded-2xl min-h-96 flex flex-col justify-between shadow-lg p-6 w-full md:w-1/2 space-y-4">
+            <div id="postsPerDay" class="bg-gray-800 border border-gray-300 rounded-2xl min-h-96 flex flex-col justify-between shadow-lg p-6   space-y-4">
                 <span class="text-gray-50 text-xl lg:text-2xl font-bold">Accepted/Rejected Applications</span>
                 <canvas ref="chartRef2" class=" w-full h-96"></canvas>
             </div>
-        </div>
-
-        <section class="m-6 bg-gray-800 shadow-md rounded-lg text-white space-x-4 pt-2 border-t border-gray-500">
+        </section>
+<section class="xl:max-w-6xl max-w-xs md:max-w-2xl lg:max-w-4xl mx-auto px-4">
+        <section class="my-6 bg-gray-800 shadow-md rounded-lg text-white pt-2 border-t border-gray-500 ">
             <button
                 class="mx-4 my-2 text-xl font-semibold px-2 py-1 transition-all duration-300 rounded-md"
                 @click="currentTab = 'users'"
@@ -308,7 +308,7 @@ onMounted(() => {
             <UsersTable :Users="Users" v-if="currentTab === 'users'"/>
             <PostsTable :Posts="Posts" v-if="currentTab === 'posts'"/>
         </section>
-
+</section>
 
 
 
