@@ -9,6 +9,7 @@ import ChatRoomList from '@/components/chat/ChatRoomList.vue'
 const props = defineProps({
     room: Object,
     auth: Object,
+    rooms: Array,
 })
 
 const messages = ref([])
@@ -98,56 +99,84 @@ onMounted(() => {
 
 <template>
     <AppLayout>
-        <div class="h-screen flex bg-gray-100">
-            <ChatRoomList
-                :currentRoomId="currentRoomId"
-                @switchRoom="handleRoomSwitch"
-            />
+        <div class="h-screen flex flex-col md:flex-row bg-gray-100">
+            <div class="md:hidden bg-white px-4 py-3 border-b">
+                <label for="mobile-room-select" class="block text-sm font-medium mb-1">Select Chat Room</label>
+                <select
+                    id="mobile-room-select"
+                    class="w-full border border-gray-300 rounded px-3 py-2"
+                    :value="currentRoomId"
+                    @change="handleRoomSwitch($event.target.value)"
+                >
+                    <option
+                        v-for="roomItem in props.rooms"
+                        :key="roomItem.id"
+                        :value="roomItem.id"
+                    >
+                        {{ roomItem.title }}
+                    </option>
+                </select>
+            </div>
+            <div class="hidden md:block w-64 border-r ">
+                <ChatRoomList
+                    :currentRoomId="currentRoomId"
+                    @switchRoom="handleRoomSwitch"
+                />
+            </div>
             <div class="flex flex-col flex-1 h-full bg-gray-100">
+
                 <div class="bg-white px-6 py-4 shadow flex items-center border-b">
                     <h2 class="text-xl font-semibold">{{ room.title }}</h2>
                 </div>
-
-            <div id="messages-container" class="flex-1 overflow-y-auto px-6 py-4 space-y-3 bg-gray-50 shrink-0">
                 <div
-                    v-for="message in messages"
-                    :key="message._id"
-                    class="flex"
-                    :class="{
-            'justify-end': message.senderId === auth.user.id.toString(),
-            'justify-start': message.senderId !== auth.user.id.toString(),
-          }"
+                    id="messages-container"
+                    class="flex-1 overflow-y-auto px-6 py-4 space-y-3 bg-gray-50 shrink-0"
                 >
-                    <img
-                        v-if="message.avatar"
-                        :src="`/storage/${message.avatar}`"
-                        alt="Profile"
-                        class="w-8 h-8 rounded-full mr-2"
-                    />
                     <div
-                        class="max-w-xs rounded-2xl px-4 py-2 text-sm shadow-md"
+                        v-for="message in messages"
+                        :key="message._id"
+                        class="flex"
                         :class="{
-              'bg-blue-500 text-white': message.senderId === auth.user.id.toString(),
-              'bg-white text-gray-800': message.senderId !== auth.user.id.toString(),
+              'justify-end': message.senderId === auth.user.id.toString(),
+              'justify-start': message.senderId !== auth.user.id.toString(),
             }"
                     >
-                        <div class="font-medium text-xs mb-1">{{ message.username }}</div>
-                        <div>{{ message.content }}</div>
-                        <div class="text-[10px] text-gray-400 mt-1 text-right">{{ formatTimestamp(message.timestamp) }}</div>
+                        <img
+                            v-if="message.avatar && message.senderId !== auth.user.id.toString()"
+                            :src="`/storage/${message.avatar}`"
+                            alt="Profile"
+                            class="w-8 h-8 rounded-full mr-2"
+                        />
+                        <div
+                            class="max-w-xs md:max-w-md lg:max-w-lg rounded-2xl px-4 py-2 text-sm shadow-md"
+                            :class="{
+                'bg-blue-500 text-white': message.senderId === auth.user.id.toString(),
+                'bg-white text-gray-800': message.senderId !== auth.user.id.toString(),
+              }"
+                        >
+                            <div class="font-medium text-xs mb-1">{{ message.username }}</div>
+                            <div>{{ message.content }}</div>
+                            <div class="text-[10px] text-gray-400 mt-1 text-right">{{ formatTimestamp(message.timestamp) }}</div>
+                        </div>
+                        <img
+                            v-if="message.avatar && message.senderId === auth.user.id.toString()"
+                            :src="`/storage/${message.avatar}`"
+                            alt="Profile"
+                            class="w-8 h-8 rounded-full ml-2"
+                        />
                     </div>
                 </div>
-            </div>
-            <form @submit.prevent="handleSendMessage" class="sticky bottom-0 z-10 bg-white p-4 border-t flex gap-2">
-                <input
-                    v-model="newMessage"
-                    type="text"
-                    placeholder="Type a message..."
-                    class="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full">
-                    Send
-                </button>
-            </form>
+                <form @submit.prevent="handleSendMessage" class="sticky bottom-0 z-10 bg-white p-4 border-t flex gap-2">
+                    <input
+                        v-model="newMessage"
+                        type="text"
+                        placeholder="Type a message..."
+                        class="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full">
+                        Send
+                    </button>
+                </form>
             </div>
         </div>
     </AppLayout>

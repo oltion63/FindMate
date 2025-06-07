@@ -19,8 +19,14 @@ class MessageController extends Controller
             abort(403, 'You are not part of this chat room.');
         }
         $authUser = auth()->user()->only(['id', 'name', 'email', 'role', 'image']);
+
+        $rooms = Room::whereHas('users', function ($query) {
+            $query->where('user_id', auth()->id());
+        })->select('id', 'title')->get();
+
         return Inertia::render('chat/Chat', [
             'room' => $room,
+            'rooms' => $rooms,
             'auth' => [
                 'user' => $authUser,
             ],
