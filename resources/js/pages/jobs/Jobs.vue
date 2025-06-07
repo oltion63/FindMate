@@ -175,7 +175,7 @@ const userRole = page.props.auth && page.props.auth.user ? page.props.auth.user.
     </AppLayout>
 
     <div v-if="showPremiumModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center relative" style="min-width: 380px; max-width: 480px;">
+        <div class="bg-white rounded-lg shadow-lg p-8 mx-4 max-w-md w-full text-center relative" >
             <button @click="closePremiumModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl font-bold focus:outline-none">&times;</button>
             <h2 class="text-xl text-blue-900 font-bold mb-4 flex items-center justify-center gap-2">
                 Premium
