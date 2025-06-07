@@ -5,6 +5,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 const props = defineProps({
     rooms: Array,
     auth: Object,
+    default: () => []
 });
 
 const handleRoomClick = (id) => {
@@ -16,7 +17,10 @@ const handleRoomClick = (id) => {
     <AppLayout>
         <div class="p-6">
             <h1 class="text-2xl font-bold mb-4">My Chat Rooms</h1>
-            <ul class="space-y-2">
+            <div v-if="rooms.length === 0" class="text-gray-500">
+                You have no chat rooms yet.
+            </div>
+            <ul v-else class="space-y-2">
                 <li
                     v-for="room in rooms"
                     :key="room.id"

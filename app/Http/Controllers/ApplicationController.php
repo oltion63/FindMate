@@ -112,6 +112,15 @@ class ApplicationController extends Controller
     public function reject($id){
         $application = Application::findOrFail($id);
         if ($application->status === 'pending' || $application->status === 'accepted') {
+            if ($application->status === 'accepted' && $application->room_id) {
+                $room = Room::find($application->room_id);
+                if ($room) {
+                    $room->users()->detach();
+                    $room->delete();
+                }
+                
+                $application->room_id = null;
+            }
             $application->update(['status' => 'rejected']);
         }
         $post = $application->post;
