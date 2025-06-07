@@ -107,7 +107,7 @@ const closeEditModal = () => {
 <template>
     <div v-if="showEditModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50"
          @click="closeEditModal">
-        <div class="bg-white rounded-lg shadow-xl min-w-md max-w-3xl p-6 h-fit" @click.stop>
+        <div class="bg-white rounded-lg shadow-xl max-w-3xl p-6 w-[90%] h-[90%]" @click.stop>
             <h2 class="text-xl font-semibold mb-4">Update Your CV</h2>
             <input type="number" class="hidden" name="user_id" id="user_id" :value="form.user_id">
             <input
@@ -123,7 +123,7 @@ const closeEditModal = () => {
 
             <div v-if="pdfLoaded" class="mt-4">
                 <h3 class="text-lg font-medium mb-2">Preview:</h3>
-                <div ref="pdfViewerContainer" class="overflow-y-auto max-h-96">
+                <div ref="pdfViewerContainer" class="overflow-y-auto max-h-80">
                 </div>
             </div>
 

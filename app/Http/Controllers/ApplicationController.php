@@ -45,7 +45,6 @@ class ApplicationController extends Controller
             'post_id' => $request->post_id,
             'status' => 'pending',
         ]);
-        $post->decrement('nrWorkers');
         $employer = $post->user_id;
         $message = 'You have a new application for '.$post->tittle . ' from ' . auth()->user()->name;
         event(new Notifications($message, $employer));
@@ -69,7 +68,9 @@ class ApplicationController extends Controller
         }
         $post = $application->post;
         $application->delete();
-        $post->increment('nrWorkers');
+        if ($application->status === 'accepted') {
+            $post->increment('nrWorkers');
+        }
 
         $employer = $post->user_id;
         $message = $employer . ' has canceled application for ' . $post->tittle;
@@ -104,6 +105,7 @@ class ApplicationController extends Controller
 
         $application->room_id = $room->id;
         $application->save();
+        $post->decrement('nrWorkers');
 
         return redirect()->back()->with('success', 'Application accepted and chat room created');
     }

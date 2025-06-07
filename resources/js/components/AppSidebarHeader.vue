@@ -94,7 +94,7 @@ const form = useForm({
 </script>
 
 <template>
-    <header class="flex h-16 items-center justify-between">
+    <header class="flex h-16 items-center justify-between mx-4 space-x-2">
         <div class="flex items-center gap-2">
             <SidebarTrigger class="-ml-1" />
             <template v-if="breadcrumbs.length > 0">
@@ -102,15 +102,15 @@ const form = useForm({
             </template>
         </div>
 
-        <div class="flex space-x-10 mr-16 items-center">
+        <div class="flex space-x-2 lg:space-x-10 xl:mr-16 items-center">
             <div  v-if="route().current('jobs.index')"
-                  class="relative w-64">
+                  class="relative w-40 md:w-52 lg:w-64">
                 <input
                     type="text"
                     v-model="searchQuery"
                     @input="handleSearch"
                     placeholder="Search..."
-                    class="border border-gray-500 rounded p-2 w-full"
+                    class="border border-gray-500 rounded p-1 lg:p-2 w-full"
                 />
                 <ul
                     v-if="results.length"
@@ -173,7 +173,7 @@ const form = useForm({
                 </button>
 
                 <transition name="fade">
-                    <div v-if="showDropdown" class="absolute right-0 z-50 mt-2 w-64 rounded-lg bg-white border border-gray-500">
+                    <div v-if="showDropdown" class="absolute right-0 z-50 mt-2 w-64 rounded-lg mr-4 xl:mr-0 bg-white border border-gray-500">
                         <div class="border-b px-4 py-2 text-sm text-gray-700 flex justify-between">
                             <span>Notifications</span>
                             <form id="clearAll" @submit.prevent="form.patch(route('markAsRead'))" ></form>

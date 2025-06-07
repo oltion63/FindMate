@@ -41,7 +41,7 @@ const closeACModal = () => {
     <Head :title="post.tittle"/>
     <AppLayout>
         <main class="mx-4 pb-4">
-            <div class="flex justify-between mx-8 items-end mt-16">
+            <div class="flex justify-between mx-8 items-end lg:mt-16">
                 <Link
                     :href="route('jobs.index')"
                     class="w-fit flex"

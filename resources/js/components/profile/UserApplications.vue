@@ -33,7 +33,7 @@ const openModal = (cvUrl, value) => {
 <template>
     <div id="table1" >
         <div class="mx-auto max-w-screen-xl mt-9">
-            <div class="bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden rounded-lg">
+            <div class="bg-gray-800 relative shadow-md sm:rounded-lg overflow-x-auto w-full rounded-lg">
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <span class="font-bold text-white text-xl">Applications</span>
                 </div>

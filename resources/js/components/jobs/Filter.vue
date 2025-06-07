@@ -38,7 +38,7 @@ const clearFilters = () => {
 </script>
 
 <template>
-    <section id="left" class="w-4/5 mx-auto lg:w-1/3 h-full bg-white rounded-lg border border-gray-500 lg:border-0">
+    <section id="left" class="w-4/5 mx-auto lg:w-1/3 h-fit bg-white border-gray-300 border rounded-lg lg:border-1">
         <div class="flex justify-between py-3 px-6">
             <span class="font-bold text-xl">Filter</span>
         </div>
