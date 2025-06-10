@@ -6,7 +6,11 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
+import { login, getUser, refreshToken, logout } from './lib/passportAuth';
+
 (window as any).Echo = echo;
+(window as any).passportAuth = { login, getUser, refreshToken, logout };
+
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
     interface ImportMetaEnv {
