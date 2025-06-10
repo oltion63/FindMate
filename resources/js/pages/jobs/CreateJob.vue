@@ -55,43 +55,48 @@ const breadcrumbs: BreadcrumbItem[] = [
 </script>
 
 <template>
-    <Head title="Add Jobs"/>
+    <Head title="Add Jobs" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <main class="p-4">
-            <div class="py-4 px-4 mx-auto max-w-2xl lg:py-8 bg-white border-gray-200 border rounded-lg mt-16">
-                <h2 class="mb-4 text-xl font-bold text-gray-900 ">Add a new job</h2>
+        <main class="p-6 bg-[#F6F6F6] min-h-screen">
+            <div class="mx-auto max-w-3xl bg-white rounded-xl shadow-lg border border-gray-200 p-8 mt-16">
+                <h2 class="mb-6 text-3xl font-extrabold text-[#111111]">Add a New Job</h2>
                 <form @submit.prevent="submit">
-                    <input type="hidden" name="user_id" v-model="form.user_id">
-                    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                        <div >
-                            <InputLabel for="tittle" class="mb-1" value="Tittle"/>
-                            <JobsTextInput
-                                placeholder="Job tittle"
-                                id="tittle"
-                                type="text"
-                                name="tittle"
-                                class="mt-1 block w-full"
-                                v-model="form.tittle"
-                                required
-                                autofocus
-                                autocomplete="tittle"
-                            />
-                            <InputError class="mt-2" :message="form.errors.tittle"/>
+                    <input type="hidden" name="user_id" v-model="form.user_id" />
+                    <div class="space-y-10">
+
+                        <!-- Basic Info: Title and Company -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <InputLabel for="tittle" class="mb-2 font-semibold text-gray-800" value="Title" />
+                                <JobsTextInput
+                                    id="tittle"
+                                    name="tittle"
+                                    placeholder="Job title"
+                                    v-model="form.tittle"
+                                    required
+                                    autofocus
+                                    autocomplete="tittle"
+                                    class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
+                                />
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.tittle" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="company_id" class="mb-2 font-semibold text-gray-800" value="Company" />
+                                <JobsTextInput
+                                    id="company_id"
+                                    name="company_id"
+                                    v-model="props.kompania.name"
+                                    readonly
+                                    class="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2 cursor-not-allowed"
+                                />
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.company_id" />
+                            </div>
                         </div>
-                        <div >
-                            <InputLabel for="company_id" class="mb-1" value="Company"/>
-                            <JobsTextInput
-                                id="company_id"
-                                type="text"
-                                name="company_id"
-                                class="mt-1 block w-full"
-                                v-model="props.kompania.name"
-                                readonly
-                            />
-                            <InputError class="mt-2" :message="form.errors.company_id"/>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <InputLabel for="description" class="mb-1" value="Description"/>
+
+                        <!-- Description (full width) -->
+                        <div>
+                            <InputLabel for="description" class="mb-2 font-semibold text-gray-800" value="Description" />
                             <TextArea
                                 placeholder="Job description here"
                                 v-model="form.description"
@@ -99,95 +104,116 @@ const breadcrumbs: BreadcrumbItem[] = [
                                 name="description"
                                 required
                                 autocomplete="description"
+                                class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
                             />
-                            <InputError class="mt-2" :message="form.errors.description"/>
+                            <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.description" />
                         </div>
-                        <div>
-                            <InputLabel for="category_id" class="mb-1" value="Category"/>
-                            <select
-                                name="category_id"
-                                id="category_id"
-                                ref="input"
-                                v-model="form.category_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2">
-                                <option value="" disabled selected>Select category</option>
-                                <option v-for="category in categories" :key="category.id" :value="category.id">{{category.name}}</option>
-                            </select>
-                            <InputError class="mt-2" :message="form.errors.category_id"/>
+
+                        <!-- Selection Inputs: Category, Type, Location -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <InputLabel for="category_id" class="mb-2 font-semibold text-gray-800" value="Category" />
+                                <select
+                                    id="category_id"
+                                    name="category_id"
+                                    v-model="form.category_id"
+                                    class="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
+                                >
+                                    <option value="" disabled selected>Select category</option>
+                                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                                </select>
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.category_id" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="type" class="mb-2 font-semibold text-gray-800" value="Type" />
+                                <select
+                                    id="type"
+                                    name="type"
+                                    v-model="form.type"
+                                    class="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
+                                >
+                                    <option value="" disabled selected>Select a type</option>
+                                    <option value="Full-Time">Full-Time</option>
+                                    <option value="Part-time">Part-time</option>
+                                    <option value="Remote">Remote</option>
+                                </select>
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.type" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="location_id" class="mb-2 font-semibold text-gray-800" value="Location" />
+                                <select
+                                    id="location_id"
+                                    name="location_id"
+                                    v-model="form.location_id"
+                                    class="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
+                                >
+                                    <option value="" disabled selected>Select city</option>
+                                    <option v-for="city in cities" :key="city.id" :value="city.id">{{ city.name }}</option>
+                                </select>
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.location_id" />
+                            </div>
                         </div>
-                        <div>
-                            <InputLabel for="type" class="mb-1" value="Type"/>
-                            <select
-                                name="type"
-                                id="type"
-                                ref="input"
-                                v-model="form.type"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2">
-                                <option value="" disabled selected>Select a type</option>
-                                <option value="Full-Time">Full-Time</option>
-                                <option value="Part-time">Part-time</option>
-                                <option value="Remote">Remote</option>
-                            </select>
-                            <InputError class="mt-2" :message="form.errors.type"/>
-                        </div>
-                        <div class="w-full">
-                            <InputLabel for="salary" class="mb-1" value="Salary"/>
-                            <NumberInput
-                                type="number"
-                                min="350"
-                                id="salary"
-                                name="salary"
-                                v-model="form.salary"
-                                required
-                                autocomplete="salary"
-                                placeholder="699"
-                            />
-                            <InputError class="mt-2" :message="form.errors.salary"/>
-                        </div>
-                        <div class="w-full">
-                            <InputLabel for="nrWorkers" class="mb-1" value="Nr. of Workers"/>
-                            <NumberInput
-                                type="number"
-                                id="nrWorkers"
-                                name="nrWorkers"
-                                v-model="form.nrWorkers"
-                                required
-                                autocomplete="nrWorkers"
-                                placeholder="3"
-                                min="1"
-                            />
-                            <InputError class="mt-2" :message="form.errors.nrWorkers"/>
-                        </div>
-                        <div>
-                            <InputLabel for="location_id" class="mb-1" value="Location"/>
-                            <select
-                                id="location_id"
-                                name="location_id"
-                                ref="input"
-                                v-model="form.location_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2">
-                                <option value="" disabled selected>Select city</option>
-                                <option v-for="city in cities" :value="city.id" :key="city.id">{{city.name}}</option>
-                            </select>
-                            <InputError class="mt-2" :message="form.errors.location_id"/>
-                        </div>
-                        <div class="w-full">
-                            <InputLabel for="expiration_date" class="mb-1" value="Expiration Date"/>
-                            <JobsTextInput
-                                placeholder="Expiration Date"
-                                id="expiration_date"
-                                type="date"
-                                class="mt-1 block w-full"
-                                v-model="form.expiration_date"
-                                required
-                                autocomplete="expiration_date"
-                            />
-                            <InputError class="mt-2" :message="form.errors.expiration_date"/>
+
+                        <!-- Numbers and Date: Salary, Nr. of Workers, Expiration -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <InputLabel for="salary" class="mb-2 font-semibold text-gray-800" value="Salary" />
+                                <NumberInput
+                                    id="salary"
+                                    name="salary"
+                                    type="number"
+                                    min="350"
+                                    v-model="form.salary"
+                                    placeholder="699"
+                                    required
+                                    autocomplete="salary"
+                                    class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
+                                />
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.salary" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="nrWorkers" class="mb-2 font-semibold text-gray-800" value="Nr. of Workers" />
+                                <NumberInput
+                                    id="nrWorkers"
+                                    name="nrWorkers"
+                                    type="number"
+                                    min="1"
+                                    v-model="form.nrWorkers"
+                                    placeholder="3"
+                                    required
+                                    autocomplete="nrWorkers"
+                                    class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
+                                />
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.nrWorkers" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="expiration_date" class="mb-2 font-semibold text-gray-800" value="Expiration Date" />
+                                <JobsTextInput
+                                    id="expiration_date"
+                                    name="expiration_date"
+                                    type="date"
+                                    v-model="form.expiration_date"
+                                    required
+                                    autocomplete="expiration_date"
+                                    class="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFCB74]"
+                                />
+                                <InputError class="mt-1 text-red-600 text-sm" :message="form.errors.expiration_date" />
+                            </div>
                         </div>
                     </div>
-                    <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gradient-to-br from-blue-900 to-blue-500 hover:bg-gradient-to-bl rounded-lg">
-                        Add Job
-                    </button>
+
+                    <div class="mt-10 flex justify-center">
+                        <button
+                            type="submit"
+                            class="w-full sm:w-auto px-10 py-3 text-lg font-semibold text-[#111111] bg-[#FFCB74] rounded-full shadow-md hover:bg-[#e6b864] transition duration-200"
+                        >
+                            Add Job
+                        </button>
+                    </div>
                 </form>
             </div>
         </main>

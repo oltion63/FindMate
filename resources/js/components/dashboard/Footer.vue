@@ -3,30 +3,31 @@
 </script>
 
 <template>
-    <footer class="pt-14 pb-4 bg-opacity-50 backdrop-blur-lg bg-gray-500">
+    <footer class="pt-14 pb-8 bg-[#111111]/90 backdrop-blur-md text-[#F6F6F6]">
         <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm mt-14 text-center md:text-left">
 
             <!-- Logo Section -->
             <div class="-mt-8 flex items-start justify-center md:col-span-1">
-                <img  :src="'storage/images/logo.png'" class="md:w-[180px] md:h-[180px] w-[130px] h-[130px]">
+                <img :src="'storage/images/logo.png'" class=" invert md:w-[180px] md:h-[180px] w-[130px] h-[130px]" alt="Logo" />
             </div>
 
+            <!-- Contact Section -->
             <div>
-                <h4 class="uppercase font-bold text-xs sm:text-sm mb-3 tracking-wide text-gray-100">CONTACT</h4>
-                <ul class="space-y-2 mb-16 sm:text-center md:text-left">
+                <h4 class="uppercase font-bold text-sm mb-4 tracking-wide text-[#FFCB74]">CONTACT</h4>
+                <ul class="space-y-3">
                     <li>
-                        <a href="#" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> Email
+                        <a href="#" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                             Email
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> Phone number
+                        <a href="#" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                            Phone number
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> City
+                        <a href="#" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                             City
                         </a>
                     </li>
                 </ul>
@@ -34,21 +35,21 @@
 
             <!-- Social Media Section -->
             <div>
-                <h4 class="uppercase font-bold text-xs sm:text-sm mb-3 tracking-wide text-gray-100">SOCIAL MEDIA</h4>
-                <ul class="space-y-2 mb-16 sm:text-center md:text-left">
+                <h4 class="uppercase font-bold text-sm mb-4 tracking-wide text-[#FFCB74]">SOCIAL MEDIA</h4>
+                <ul class="space-y-3">
                     <li>
-                        <a href="https://www.facebook.com" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> Facebook
+                        <a href="https://www.facebook.com" target="_blank" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                            Facebook
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.instagram.com" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> Instagram
+                        <a href="https://www.instagram.com" target="_blank" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                           Instagram
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> LinkedIn
+                        <a href="https://www.linkedin.com" target="_blank" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                            LinkedIn
                         </a>
                     </li>
                 </ul>
@@ -56,21 +57,21 @@
 
             <!-- Learn More Section -->
             <div>
-                <h4 class="uppercase font-bold text-xs sm:text-sm mb-3 tracking-wide text-gray-100">LEARN MORE</h4>
-                <ul class="space-y-2 mb-16 sm:text-center md:text-left">
+                <h4 class="uppercase font-bold text-sm mb-4 tracking-wide text-[#FFCB74]">LEARN MORE</h4>
+                <ul class="space-y-3">
                     <li>
-                        <a href="#" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> Community
+                        <a href="#" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                            Community
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> Privacy Policy
+                        <a href="#" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                            Privacy Policy
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="footer-link mb-2 text-center sm:text-left transition-transform duration-200 transform hover:scale-110 hover:translate-x-2 hover:text-white">
-                            <span class="arrow">></span> Terms Of Use
+                        <a href="#" class="footer-link block transition-transform duration-200 transform hover:scale-105 hover:text-[#FFCB74]">
+                            Terms Of Use
                         </a>
                     </li>
                 </ul>
@@ -78,10 +79,9 @@
         </div>
 
         <!-- Footer Bottom -->
-        <div class="container mx-auto flex justify-center items-center w-full mb-3 text-xs border-t border-white-500 pt-8 footer-bottom">
-            <div class="text-center w-full">
-                <p>Copyright FindJob. . All Rights Reserved.</p>
-            </div>
+        <div class="container mx-auto flex justify-center items-center w-full mt-10 border-t border-[#2F2F2F] pt-6 text-xs text-center text-white">
+            <p>© FindMate. All Rights Reserved.</p>
         </div>
     </footer>
 </template>
+
