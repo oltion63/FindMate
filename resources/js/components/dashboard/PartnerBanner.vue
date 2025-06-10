@@ -40,16 +40,6 @@
 </template>
 
 
-<script setup>
-const logos = [
-    { src: 'storage/images/prlogo.png', alt: 'PR Logo' },
-    { src: 'storage/images/speexx_logo.png', alt: 'Speexx Logo' },
-    { src: 'storage/images/binni.png', alt: 'Binni Logo' },
-    { src: 'storage/images/starlabs.png', alt: 'StarLabs Logo' },
-    { src: 'storage/images/ipko.png', alt: 'Ipko Logo' },
-]
-</script>
-
 <style scoped>
 @keyframes fadeIn {
     to {
