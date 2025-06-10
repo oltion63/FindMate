@@ -84,7 +84,7 @@ Route::get('auth/google/callback', [GoogleAuthController::class, 'googleCallback
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/chat/room/{id}', [MessageController::class, 'room']);
+    Route::get('/chat/room/{id}', [MessageController::class, 'room'])->name('room');
     Route::get('/chat/messages', [MessageController::class, 'messages']);
     Route::post('/chat/message', [MessageController::class, 'sendMessage']);
     Route::get('/chat/list', [MessageController::class, 'userRooms']);

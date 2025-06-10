@@ -1,6 +1,6 @@
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
+import {Link, Head} from '@inertiajs/vue3'
 
 const props = defineProps({
     rooms: Array,
@@ -8,12 +8,10 @@ const props = defineProps({
     default: () => []
 });
 
-const handleRoomClick = (id) => {
-    window.location.href = `/chat/room/${id}`;
-};
 </script>
 
 <template>
+    <Head title="Chats"/>
     <AppLayout>
         <div class="p-6">
             <h1 class="text-2xl font-bold mb-4">My Chat Rooms</h1>
@@ -24,10 +22,14 @@ const handleRoomClick = (id) => {
                 <li
                     v-for="room in rooms"
                     :key="room.id"
-                    class="cursor-pointer p-4 border rounded hover:bg-gray-100"
-                    @click="handleRoomClick(room.id)"
+                    class="p-0"
                 >
-                    {{ room.title || `Room #${room.id}` }}
+                    <Link
+                        :href="route('room', { id: room.id })"
+                        class="block p-4 border rounded hover:bg-gray-100 transition"
+                    >
+                        {{ room.title || `Room #${room.id}` }}
+                    </Link>
                 </li>
             </ul>
         </div>
