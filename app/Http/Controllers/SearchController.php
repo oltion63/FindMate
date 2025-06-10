@@ -24,6 +24,7 @@ class SearchController extends Controller
                         $q->where('name', 'like', "%$query%");
                     });
             })
+            ->where('created_at', '<=', now()->subHours(24))
             ->limit(10)
             ->get();
         return response()->json($results);
