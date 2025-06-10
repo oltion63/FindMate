@@ -35,50 +35,106 @@ const openCv = () =>{
 </script>
 
 <template>
-    <div id="stats" class="space-y-4 lg:space-y-0 lg:flex justify-evenly bg-gray-800 rounded-lg p-6 text-white">
-        <button v-if="$page.props.auth.user.role === 'employee'" class="flex space-x-2 text-start items-center" @click="openCv">
-            <FileUser class="w-10 h-10" />
+    <div
+        id="stats"
+        class="space-y-4 lg:space-y-0 lg:flex justify-evenly bg-[#2F2F2F] rounded-lg p-6 text-[#F6F6F6] text-sm"
+    >
+        <button
+            v-if="$page.props.auth.user.role === 'employee'"
+            class="flex space-x-2 text-start items-center"
+            @click="openCv"
+        >
+            <FileUser class="w-10 h-10 text-[#FFCB74]" />
             <span class="grid items-center">
-                                    <span>CV</span>
-                                    <span v-if="!$page.props.auth.user.cv" class="font-bold ">No CV Added</span>
-                                    <span v-if="$page.props.auth.user.cv" class="font-bold underline">View your CV</span>
-                                </span>
+        <span>CV</span>
+        <span
+            v-if="!$page.props.auth.user.cv"
+            class="font-semibold text-[#FFCB74]"
+        >
+          No CV Added
+        </span>
+        <span
+            v-if="$page.props.auth.user.cv"
+            class="font-semibold underline text-[#FFCB74]"
+        >
+          View your CV
+        </span>
+      </span>
         </button>
-        <button v-if="$page.props.auth.user.role === 'employer'" class="flex space-x-2 items-center" @click="openModal">
-            <Building2 class="w-10 h-10" />
-            <span class="grid text-start items-center">
-                                    <span>Company</span>
-                                    <span v-if="$page.props.auth.user.company === null" class="font-bold underline">No Company Added</span>
-                                    <span v-if="$page.props.auth.user.company !== null" class="font-bold underline">View your company</span>
-                                </span>
+
+        <button
+            v-if="$page.props.auth.user.role === 'employer'"
+            class="flex space-x-2 items-center text-start"
+            @click="openModal"
+        >
+            <Building2 class="w-10 h-10 text-[#FFCB74]" />
+            <span class="grid items-center">
+        <span>Company</span>
+        <span
+            v-if="$page.props.auth.user.company === null"
+            class="font-semibold underline text-[#FFCB74]"
+        >
+          No Company Added
+        </span>
+        <span
+            v-if="$page.props.auth.user.company !== null"
+            class="font-semibold underline text-[#FFCB74]"
+        >
+          View your company
+        </span>
+      </span>
         </button>
-        <span v-if="$page.props.auth.user.role === 'employee'" class="flex space-x-2 items-center">
-            <FileHeart class="w-10 h-10"/>
-            <span class="grid items-center">
-                                    <span>Saved Applications</span>
-                                    <span class="font-bold">{{ props.countSaved }}</span>
-                                </span>
+
+        <span
+            v-if="$page.props.auth.user.role === 'employee'"
+            class="flex space-x-2 items-center"
+        >
+      <FileHeart class="w-10 h-10 text-[#FFCB74]" />
+      <span class="grid items-center">
+        <span>Saved Applications</span>
+        <span class="font-semibold text-[#FFCB74]">
+          {{ props.countSaved }}
         </span>
-        <span v-if="$page.props.auth.user.role === 'employer'" class="flex space-x-2 items-center">
-            <FileUser  class="w-10 h-10"/>
-            <span class="grid items-center">
-                                    <span>Applications</span>
-                                    <span class="font-bold">{{ props.countApplications }}</span>
-                                </span>
+      </span>
+    </span>
+
+        <span
+            v-if="$page.props.auth.user.role === 'employer'"
+            class="flex space-x-2 items-center"
+        >
+      <FileUser class="w-10 h-10 text-[#FFCB74]" />
+      <span class="grid items-center">
+        <span>Applications</span>
+        <span class="font-semibold text-[#FFCB74]">
+          {{ props.countApplications }}
         </span>
-        <span v-if="$page.props.auth.user.role === 'employee'" class="flex space-x-2 items-center">
-            <FileCheck class="w-10 h-10"/>
-            <span class="grid items-center">
-                <span>Applied</span>
-                <span class="font-bold">{{props.countApplied}}</span>
-            </span>
+      </span>
+    </span>
+
+        <span
+            v-if="$page.props.auth.user.role === 'employee'"
+            class="flex space-x-2 items-center"
+        >
+      <FileCheck class="w-10 h-10 text-[#FFCB74]" />
+      <span class="grid items-center">
+        <span>Applied</span>
+        <span class="font-semibold text-[#FFCB74]">
+          {{ props.countApplied }}
         </span>
-        <span v-if="$page.props.auth.user.role === 'employer'" class="flex space-x-2 items-center">
-            <LayoutList class="w-10 h-10" />
-            <span class="grid items-center">
-                <span>Posts</span>
-                <span class="font-bold">{{props.countPosts}}</span>
-            </span>
+      </span>
+    </span>
+
+        <span
+            v-if="$page.props.auth.user.role === 'employer'"
+            class="flex space-x-2 items-center"
+        >
+      <LayoutList class="w-10 h-10 text-[#FFCB74]" />
+      <span class="grid items-center">
+        <span>Posts</span>
+        <span class="font-semibold text-[#FFCB74]">
+          {{ props.countPosts }}
         </span>
+      </span>
+    </span>
     </div>
 </template>
