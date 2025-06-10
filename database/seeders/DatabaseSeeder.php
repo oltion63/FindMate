@@ -7,9 +7,12 @@ use App\Models\Company;
 use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
 use Database\Factories\CompanyFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\Client;
 
 class DatabaseSeeder extends Seeder
 {
@@ -53,5 +56,19 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Company::factory(1)->create();
         Post::factory(10)->create();
+
+
+        DB::table('oauth_clients')->insert([
+            'id' => '01975a88-3059-7060-baf3-94a1869b048a',
+            'name' => 'FindMate',
+            'secret' => Hash::make('lQ6nWW65X6QrnwHi4MfyOaKuzLH5hI2YRK7aWmlg'),
+            'provider' => 'users',
+            'redirect_uris' => '',
+            'grant_types' => '["password","refresh_token"]',
+            'revoked' => false,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
+
 }

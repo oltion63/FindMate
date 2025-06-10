@@ -4,6 +4,7 @@ import { watch, nextTick } from "vue";
 import InputError from "@/components/InputError.vue";
 import JobsTextInput from "@/components/jobs/JobsTextInput.vue";
 import {useForm, usePage} from "@inertiajs/vue3";
+import { User, Mail, Phone, CalendarDays, MapPin, Navigation } from 'lucide-vue-next';
 
 // Set the worker source
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.mjs";
@@ -96,7 +97,7 @@ function formatDate(dateString) {
 
 <template>
     <div v-if="isApplyModalVisible" class="fixed inset-0 bg-black bg-opacity-50 flex overflow-y-auto justify-center items-center z-50 p-4 md:p-6"  @click="closeModal">
-        <div class="bg-white p-6 rounded-lg shadow-lg max-w-4xl mt-80 lg:mt-0 w-full " @click.stop>
+        <div class="bg-white p-6 pt-16 rounded-lg shadow-lg max-w-4xl mt-80 lg:mt-0 w-full " @click.stop>
             <form @submit.prevent="submit" class="hidden" id="applicationForm">
                 <JobsTextInput
                     id="user_id"
@@ -119,22 +120,28 @@ function formatDate(dateString) {
                 />
                 <InputError class="mt-2" :message="form.errors.post_id"/>
             </form>
-            <header class="py-2 text-xl font-bold mb-4">
-                Your information
-            </header>
+
             <div class="md:flex justify-evenly md:divide-x divide-gray-800">
                 <section class="w-full md:w-1/2 px-2">
+                    <header class="py-2 text-xl font-bold mb-4">
+                        Your information
+                    </header>
                     <div class="py-3 space-y-2 md:space-y-6 border-b border-amber-50">
-                        <h2><strong>Name:</strong> {{ props.user.name }} {{props.user.lastname}}</h2>
-                        <h2><strong>Email:</strong> {{ props.user.email }}</h2>
-                        <h2><strong>Phone:</strong> {{ props.user.phone }}</h2>
-                        <h2><strong>Birthday:</strong> {{ formatDate(props.user.birthday) }}</h2>
-                        <h2><strong>City:</strong> {{ props.user.city.name }}</h2>
-                        <h2><strong>Address:</strong> {{ props.user.address ?? 'No Address' }}</h2>
+                        <span class="flex gap-2"><User/> {{ props.user.name }} {{props.user.lastname}}</span>
+                        <span class="flex gap-2"><Mail/> {{ props.user.email }}</span>
+                        <span class="flex gap-2"><Phone/> {{ props.user.phone }}</span>
+                        <span class="flex gap-2"><CalendarDays/> {{ formatDate(props.user.birthday) }}</span>
+                        <span class="flex gap-2"><MapPin/> {{ props.user.city.name }}</span>
+                        <span class="flex gap-2"><Navigation /> {{ props.user.address ?? 'No Address' }}</span>
                     </div>
                 </section>
-                <section class="w-full md:w-1/2 px-4 h-[55vh] overflow-y-auto">
-                    <div id="pdfContainer" class="flex flex-col items-center "></div>
+                <section class="w-full md:w-1/2 px-4">
+                    <header class="py-2 text-xl font-bold mb-4">
+                        Your CV
+                    </header>
+                    <section class="h-[55vh] overflow-y-auto">
+                        <div id="pdfContainer" class="flex flex-col items-center "></div>
+                    </section>
                 </section>
             </div>
             <footer class="flex justify-end space-x-4 mt-8">

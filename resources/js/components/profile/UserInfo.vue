@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {Link} from "@inertiajs/vue3";
+import {Mail, Phone, CalendarDays, MapPin, MapPinHouse, UserPlus, Building2} from "lucide-vue-next";
 
 const props = defineProps({
     user: {
@@ -26,13 +27,13 @@ const isProfileIncomplete = !props.user.phone || !props.user.birthday || !props.
             <h2>{{ user.name }} {{ user.lastname }}</h2>
         </div>
         <div class="py-3 space-y-6 border-b border-amber-50">
-            <h2 v-if="$page.props.auth.user.company" >Company: {{ user.company?.name ?? 'No company'}}</h2>
-            <h2>Email: {{ user.email }}</h2>
-            <h2>Phone: {{ user.phone }}</h2>
-            <h2>Birthday: {{ formatDate(user.birthday) }}</h2>
-            <h2>City: {{ user.city?.name }}</h2>
-            <h2>Address: {{ user.address ?? 'No Address' }}</h2>
-            <h2>Joined At: {{ formatDate(user.created_at) }}</h2>
+            <span class="flex gap-x-2" v-if="$page.props.auth.user.company" ><Building2/> {{ user.company?.name ?? 'No company'}}</span>
+            <span class="flex gap-x-2"><Mail/> {{ user.email }}</span>
+            <span class="flex gap-x-2"><Phone/> {{ user.phone }}</span>
+            <span class="flex gap-x-2"><CalendarDays/> {{ formatDate(user.birthday) }}</span>
+            <span class="flex gap-x-2"><MapPin/> {{ user.city?.name }}</span>
+            <span class="flex gap-x-2"><MapPinHouse />{{ user.address ?? 'No Address' }}</span>
+            <span class="flex gap-x-2"><UserPlus /> {{ formatDate(user.created_at) }}</span>
         </div>
         <div class="pt-6">
             <Link :href="route('profile.edit')" class="flex space-x-2 w-fit">

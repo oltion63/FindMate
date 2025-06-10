@@ -4,8 +4,8 @@ export async function login(email: string, password: string) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
       grant_type: 'password',
-      client_id: '01973d3c-2dc8-72b0-a9bf-16e9d3258237',
-      client_secret: '5tBdfzuYTGmNW4tcbp1WaXin4tjygE4qdzEp06ub',
+      client_id: '01975a88-3059-7060-baf3-94a1869b048a',
+      client_secret: 'lQ6nWW65X6QrnwHi4MfyOaKuzLH5hI2YRK7aWmlg',
       username: email,
       password: password,
       scope: ''
@@ -37,8 +37,8 @@ export async function refreshToken() {
     body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refresh_token || '',
-      client_id: '01973d3c-2dc8-72b0-a9bf-16e9d3258237',
-      client_secret: '5tBdfzuYTGmNW4tcbp1WaXin4tjygE4qdzEp06ub',
+      client_id: '01975a88-3059-7060-baf3-94a1869b048a',
+      client_secret: 'lQ6nWW65X6QrnwHi4MfyOaKuzLH5hI2YRK7aWmlg',
       scope: ''
     })
   });
