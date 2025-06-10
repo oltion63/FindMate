@@ -5,6 +5,7 @@ import { format } from 'date-fns'
 import echo from '@/echo.js'
 import AppLayout from '@/layouts/AppLayout.vue'
 import ChatRoomList from '@/components/chat/ChatRoomList.vue'
+import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     room: Object,
@@ -98,6 +99,7 @@ onMounted(() => {
 </script>
 
 <template>
+    <Head :title="room.title"/>
     <AppLayout>
         <div class="h-screen flex flex-col md:flex-row bg-gray-100">
             <div class="md:hidden bg-white px-4 py-3 border-b">
@@ -132,6 +134,9 @@ onMounted(() => {
                     id="messages-container"
                     class="flex-1 overflow-y-auto px-6 py-4 space-y-3 bg-gray-50 shrink-0"
                 >
+                    <div v-if="messages.length === 0" class="flex items-center justify-center h-full">
+                        Start a conversation
+                    </div>
                     <div
                         v-for="message in messages"
                         :key="message._id"
