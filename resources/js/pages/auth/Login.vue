@@ -6,6 +6,8 @@ import InputLabel from '@/components/InputLabel.vue';
 import PrimaryButton from '@/components/PrimaryButton.vue';
 import TextInput from '@/components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { login as passportLogin } from '@/lib/passportAuth';
+import { ref } from 'vue';
 
 defineProps({
     canResetPassword: {
@@ -22,8 +24,21 @@ const form = useForm({
     remember: false,
 });
 
+const loginError = ref('');
+
 const submit = () => {
+    loginError.value = '';
     form.post(route('login'), {
+        onSuccess: async (page) => {
+            const result = await passportLogin(form.email, form.password);
+            if (result.success) {
+            } else {
+                loginError.value = 'Logged in, but failed to get API token.';
+            }
+        },
+        onError: () => {
+            form.reset('password');
+        },
         onFinish: () => form.reset('password'),
     });
 };
@@ -33,6 +48,9 @@ const submit = () => {
     <AuthBase>
         <Head title="Log in" />
 
+        <div v-if="loginError" class="mb-4 text-sm font-medium text-red-600">
+            {{ loginError }}
+        </div>
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
@@ -100,6 +118,9 @@ const submit = () => {
                 >
                     <span class="mx-auto ">Log In</span>
                 </PrimaryButton>
+            </div>
+            <div v-if="loginError" class="mt-4 text-sm text-red-600">
+                {{ loginError }}
             </div>
             <div class="w-full flex items-center text-sm text-center text-gray-600 my-4">
                 <hr class="flex-grow border-t border-gray-300">

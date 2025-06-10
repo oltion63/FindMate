@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
+use Laravel\Passport\Passport;
+use Carbon\CarbonInterval;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Passport::loadKeysFrom(__DIR__.'/../secrets/oauth');
+        Passport::tokensExpireIn(CarbonInterval::days(15));
+        Passport::refreshTokensExpireIn(CarbonInterval::days(30));
+        Passport::personalAccessTokensExpireIn(CarbonInterval::months(6));
+        Passport::enablePasswordGrant();
+        
         Inertia::share([
             'notifications' => function () {
                 $userId = auth()->id();
