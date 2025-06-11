@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import type { BreadcrumbItem } from '@/types/index.js';
 import {onMounted, ref} from "vue";
 import AppLayout from '@/layouts/AppLayout.vue';
 import {Head} from '@inertiajs/vue3';
@@ -8,6 +9,7 @@ import UsersTable from "@/components/dashboard/UsersTable.vue";
 import PostsTable from "@/components/dashboard/PostsTable.vue";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+
 
 const props = defineProps({
     EmployeeCount: Number,
@@ -168,11 +170,17 @@ onMounted(() => {
     }
 });
 
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
+];
 </script>
 
 <template>
     <Head title="Dashboard"/>
-    <AppLayout>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">Dashboard</h2>
         </template>

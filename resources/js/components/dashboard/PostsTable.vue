@@ -63,7 +63,7 @@ const openDeleteModal = (id) => {
                                 </button>
 
                             </td>
-                            <td class=" py-4 text-center">
+                            <td class="px-6 py-4 text-center">
                                 <Link
                                     :href="route('jobs.show', {id: post.id})"
                                     class="text-blue-500 underline "
