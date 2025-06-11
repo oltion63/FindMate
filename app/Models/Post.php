@@ -40,4 +40,7 @@ class Post extends Model
     public function savedPosts(){
         return $this->hasMany(Post::class, 'post_id');
     }
+    public function reports(){
+        return $this->hasMany(Report::class, 'post_id');
+    }
 }

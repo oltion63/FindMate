@@ -71,6 +71,15 @@ class User extends Authenticatable implements OAuthenticatable
         return $this->hasMany(Message::class);
     }
 
+    public function reportFiled()
+    {
+        return $this->hasMany(Report::class, 'user_id');
+    }
+    public function reportReviewed(){
+        return $this->hasMany(Report::class, 'reviewed_by');
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
