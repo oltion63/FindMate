@@ -6,6 +6,7 @@ import JobsCompanyDetails from "@/components/jobs/JobsCompanyDetails.vue";
 import {ref} from "vue";
 import ApplyModal from "@/pages/jobs/ApplyModal.vue";
 import AboutCompanyModal from "@/components/jobs/AboutCompanyModal.vue";
+import ReportModal from '@/pages/jobs/ReportModal.vue';
 
 const props = defineProps({
     post: {
@@ -24,6 +25,14 @@ const updateApplyModalVisibility = (value) => {
 };
 const closeModal = () => {
     isApplyModalVisible.value = false;
+};
+
+const isReportModalVisible = ref(false);
+const updateReportModalVisibility = (value) => {
+    isReportModalVisible.value = value;
+};
+const closeReportModal = () => {
+    isReportModalVisible.value = false;
 };
 
 
@@ -60,6 +69,15 @@ const closeACModal = () => {
                 <JobDetails :post="post" :savedPost="savedPost" :isApplyModalVisible="isApplyModalVisible" @update:isApplyModalVisible="updateApplyModalVisibility" />
                 <JobsCompanyDetails :post="post" :isACModalVisible="isACModalVisible" @update:isACModalVisible="updateACModalVisibility"/>
             </div>
+            <div class="w-full flex justify-center">
+                <button
+                    @click="isReportModalVisible = true"
+                    class="py-2 px-6 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 transition duration-300 ease-in-out"
+                >
+                    Report
+                </button>
+            </div>
+            <ReportModal v-if="isReportModalVisible" :post="post" @close="closeReportModal"/>
             <AboutCompanyModal v-if="isACModalVisible" @close="closeACModal" :post="post" />
             <ApplyModal v-if="isApplyModalVisible" @close="closeModal" :user="user"  :post="post"/>
         </main>

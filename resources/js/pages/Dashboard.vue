@@ -244,7 +244,5 @@ const breadcrumbs: BreadcrumbItem[] = [
                 <canvas ref="chartRef2" class=" w-full h-96"></canvas>
             </div>
         </section>
-
-
     </AppLayout>
 </template>

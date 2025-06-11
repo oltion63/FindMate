@@ -22,7 +22,7 @@ defineProps({
         <NavBar/>
         <FirstText/>
 
-        <section class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 py-8 px-4 border-t border-gray-400 border-b">
+        <section class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 py-8 px-4 border-t bg-white border-gray-400 border-b">
             <card>
                 <template v-slot:numri>
                     50+
@@ -83,35 +83,50 @@ defineProps({
 
         </section>
 
-        <section class="">
-            <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-                <img class="w-full height:70vh" :src="'storage/images/jobSearch.png'" alt="dashboard image">
-                <div class="mt-4 md:mt-0">
-                    <h2 class="mb-4 text-4xl tracking-tight font-extra-bold text-gray-900 ">Join our platform today and connect with top employers!</h2>
-                    <p class="mb-6 font-light text-gray-700 md:text-lg">FindJob lets you discover exciting career opportunities, apply with ease, and take the next step toward your dream job.</p>
+        <!-- Feature Image & Call to Action -->
+        <!-- Feature Image & Call to Action -->
+        <section class="py-16 px-6 bg-white">
+            <div class="max-w-screen-xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+
+                <!-- Image -->
+                <img class="w-full rounded-xl shadow-xl" :src="'/storage/images/jobSearch.png'" alt="dashboard image" />
+
+                <!-- Text Block with Black Background -->
+                <div class="bg-[#111111] text-[#F6F6F6] p-8 rounded-3xl shadow-lg">
+                    <h2 class="text-4xl font-extrabold mb-4 text-[#FFCB74]">
+                        Join our platform today and connect with top employers!
+                    </h2>
+                    <p class="mb-6 text-lg leading-relaxed">
+                        FindJob lets you discover exciting career opportunities, apply with ease, and take the next step toward your dream job.
+                    </p>
                     <Link
                         :href="route('jobs.index')"
-                        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border-b border-gray-700  hover:scale-x-110 transition   "
+                        class="inline-flex items-center gap-2 px-6 py-3 text-[#111111] font-bold bg-[#FFCB74] rounded-full hover:bg-[#e6b864] transition duration-200 shadow"
                     >
                         Get started
-                        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
                     </Link>
                 </div>
-            </div>
-
-        </section>
-        <section>
-            <div class="flex  justify-center border-t border-gray-400 text-xl py-4">
-                <span class="my-4">OUR PARTNERS</span>
 
             </div>
         </section>
-        <partner-banner/>
+
+
+        <!-- Partners -->
+        <section class="border-t border-gray-300 py-12 bg-white text-center">
+            <h3 class="inline-block px-6 py-2 mb-8 text-2xl font-extrabold tracking-wide text-[#111111] uppercase bg-white rounded-md ">
+                Our Partners
+            </h3>
+            <div class="max-w-6xl mx-auto px-4">
+                <PartnerBanner />
+            </div>
+        </section>
 
 
 
-        <Footer id="footer"/>
-
-
+        <!-- Footer -->
+        <Footer id="footer" />
     </div>
 </template>

@@ -12,7 +12,7 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable implements OAuthenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -34,6 +34,7 @@ class User extends Authenticatable implements OAuthenticatable
         'google_id',
         'email_verified_at',
         'is_premium',
+        'premium_until',
     ];
 
     public function jobs(){
@@ -58,6 +59,10 @@ class User extends Authenticatable implements OAuthenticatable
 
     public function isPremium(): bool
     {
+        if ($this->is_premium && $this->premium_until && now()->greaterThan($this->premium_until)) {
+            $this->is_premium = false;
+            $this->save();
+        }
         return (bool) $this->is_premium;
     }
 
@@ -70,6 +75,15 @@ class User extends Authenticatable implements OAuthenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    public function reportFiled()
+    {
+        return $this->hasMany(Report::class, 'user_id');
+    }
+    public function reportReviewed(){
+        return $this->hasMany(Report::class, 'reviewed_by');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

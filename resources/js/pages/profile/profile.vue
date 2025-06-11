@@ -130,31 +130,35 @@ const breadcrumbs: BreadcrumbItem[] = [
                 <Link
                     v-if="(!company || company.length === 0) && $page.props.auth.user.role === 'employer'"
                     :href="route('createCompany')"
-                    class="text-white bg-gradient-to-br from-gray-800 to-blue-500 hover:bg-gradient-to-bl hover:scale-105 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    class="bg-[#2F2F2F] text-white hover:bg-[#f0b24b] transition font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-block"
                 >
                     Add Company
                 </Link>
+
                 <Link
                     v-if="company && company.length !== 0 && $page.props.auth.user.role === 'employer'"
                     :href="route('editCompany')"
-                    class="text-white bg-gradient-to-br from-gray-800 to-blue-500 hover:bg-gradient-to-bl hover:scale-105 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    class="bg-[#2F2F2F] text-white hover:bg-[#f0b24b] transition font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-block"
                 >
                     Edit Company
                 </Link>
+
                 <button
                     v-if="$page.props.auth.user.role === 'employee' && !$page.props.auth.user.cv?.file"
-                    @click = "openModal"
-                    class="text-white bg-gradient-to-br from-gray-800 to-blue-500 hover:bg-gradient-to-bl hover:scale-105 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    @click="openModal"
+                    class="bg-[#2F2F2F] text-white hover:bg-[#f0b24b] transition font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                     Add CV
                 </button>
+
                 <button
                     v-if="$page.props.auth.user.role === 'employee' && $page.props.auth.user.cv?.file"
-                    @click = "openEditModal"
-                    class="text-white bg-gradient-to-br from-gray-800 to-blue-500 hover:bg-gradient-to-bl hover:scale-105 transition font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    @click="openEditModal"
+                    class="bg-[#2F2F2F] text-white hover:bg-[#f0b24b] transition font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                     Edit CV
                 </button>
+
             </div>
             <CompanyModal :company="company" v-if="isModalVisible" @close="closeModal"/>
             <UploadCVModal  v-if="showModal" :show="showModal" @close="showModal = false" />

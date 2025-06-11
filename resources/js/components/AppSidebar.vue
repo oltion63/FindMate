@@ -6,6 +6,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid, User, Briefcase, PlusCircle, Proportions, Wrench } from 'lucide-vue-next';
+
 import AppLogo from './AppLogo.vue';
 import { MessageCircle } from 'lucide-vue-next';
 
@@ -51,6 +52,7 @@ const mainNavItems: NavItem[] = [
         icon: Wrench,
         role: ['admin'],
     },
+
 
 ];
 
