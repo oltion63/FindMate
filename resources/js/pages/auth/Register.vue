@@ -56,10 +56,10 @@ const previewImage = (event) => {
         <Head title="Register" />
         <div class="lg:flex lg:justify-between lg:space-x-60 mb-4">
         <div class="w-[30rem] my-auto hidden lg:block">
-            <span class="text-6xl text-center font-bold flex justify-center mb-6">Join Us Today</span>
-            <p class="text-center text-lg text-gray-600 mb-6">Create an account to start your journey with us.</p>
+            <span class="text-6xl text-[#FFCB74] text-center font-bold flex justify-center mb-6">Join Us Today</span>
+            <p class="text-center text-lg text-gray-100 mb-6">Create an account to start your journey with us.</p>
         </div>
-        <div class="z-20 mt-6 w-full overflow-hidden bg-gradient-to-b from-cyan-100 via-white to-white px-6 pb-4 shadow-lg sm:max-w-md sm:rounded-lg">
+        <div class="z-20 mt-6 w-full overflow-hidden bg-gradient-to-b from-[#FFCB74] via-gray-100 to-gray-300 px-6 pb-4 shadow-lg sm:max-w-md sm:rounded-lg">
             <img src="/storage/images/logo.png" width="150px" height="150px" class="mx-auto" alt="logo">
             <form @submit.prevent="submit">
             <div class="flex justify-between mt-4 h-full items-center">
@@ -78,7 +78,7 @@ const previewImage = (event) => {
                     </div>
                     <div>
                         <label for="image"
-                               class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-2 py-2.5 hover:cursor-pointer dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                               class="text-black bg-[#FFCB74] hover:bg-[#2f2f2f] hover:text-white  font-medium rounded-lg text-sm px-2 py-2.5 hover:cursor-pointer dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                             Choose Image
                         </label>
                     </div>
@@ -88,7 +88,7 @@ const previewImage = (event) => {
                 <div class="w-1/2">
                     <div v-if="imageSrc" class="items-center flex justify-center">
                         <img :src="imageSrc" alt="Image Preview"
-                             class="w-28 h-28 object-cover rounded-full border-2 border-cyan-200"/>
+                             class="w-28 h-28 object-cover rounded-full border-2 border-[#FFCB74]"/>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@ const previewImage = (event) => {
                         id="lastname"
                         type="text"
                         class="mt-1 block w-full pl-3"
-                        placeholder="Lastname"
+                        placeholder="Last Name"
                         v-model="form.lastname"
                         autocomplete="lastname"
                     />
@@ -258,7 +258,7 @@ const previewImage = (event) => {
                 </Link>
 
                 <PrimaryButton
-                    class="ms-4 bg-cyan-700"
+                    class="ms-4 bg-[#2f2f2f] hover:bg-[#FFCB74] hover:text-[#111111]"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
