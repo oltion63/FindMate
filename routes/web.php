@@ -14,11 +14,29 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\MessageController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('profilePage');
+        }
+    }
     return Inertia::render('Welcome');
 })->name('welcome');
+
 Route::get('/home', function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('profilePage');
+        }
+    }
     return Inertia::render('Welcome');
 })->name('home');
 

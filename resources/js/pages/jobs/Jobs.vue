@@ -72,8 +72,10 @@ const closePremiumModal = () => {
     showPremiumModal.value = false;
 };
 
+const selectedPlan = ref('1month');
+
 const goToStripeCheckout = () => {
-    window.location.href = "/stripe-checkout";
+    window.location.href = `/stripe-checkout?plan=${selectedPlan.value}`;
 };
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -199,7 +201,35 @@ const userRole = page.props.auth && page.props.auth.user ? page.props.auth.user.
                         A <span class="font-semibold text-blue-900">gold star</span> <span class="text-yellow-500 font-bold">★</span> highlights your premium status on your posts.
                     </li>
                 </ul>
-                <div class="text-xs text-gray-500 mt-3 pl-1">Only <span class="font-semibold text-blue-900">120€</span> per year for all premium benefits.</div>
+            </div>
+            <div class="mb-6 flex flex-col items-center">
+                <label class="block font-semibold mb-4 text-lg text-center w-full">Choose your plan:</label>
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-center w-full">
+                    <label class="flex flex-col items-center bg-white border-2 border-indigo-200 rounded-2xl px-6 py-4 shadow-md cursor-pointer transition-all duration-200 hover:border-indigo-500 hover:shadow-lg w-56">
+                        <input type="radio" value="1month" v-model="selectedPlan" class="accent-indigo-600 mb-2 scale-125" />
+                        <span class="flex items-end font-bold text-indigo-700 text-lg h-8">
+                <span class="text-2xl leading-none">1</span>
+                <span class="text-sm align-bottom ml-1">month</span>
+            </span>
+                        <span class="text-gray-500 text-base">9.99€</span>
+                    </label>
+                    <label class="flex flex-col items-center bg-white border-2 border-indigo-200 rounded-2xl px-6 py-4 shadow-md cursor-pointer transition-all duration-200 hover:border-indigo-500 hover:shadow-lg w-56">
+                        <input type="radio" value="6months" v-model="selectedPlan" class="accent-indigo-600 mb-2 scale-125" />
+                        <span class="flex items-end font-bold text-indigo-700 text-lg h-8">
+                <span class="text-2xl leading-none">6</span>
+                <span class="text-sm align-bottom ml-1">months</span>
+            </span>
+                        <span class="text-gray-500 text-base">49.99€</span>
+                    </label>
+                    <label class="flex flex-col items-center bg-white border-2 border-indigo-200 rounded-2xl px-6 py-4 shadow-md cursor-pointer transition-all duration-200 hover:border-indigo-500 hover:shadow-lg w-56">
+                        <input type="radio" value="1year" v-model="selectedPlan" class="accent-indigo-600 mb-2 scale-125" />
+                        <span class="flex items-end font-bold text-indigo-700 text-lg h-8">
+                <span class="text-2xl leading-none">1</span>
+                <span class="text-sm align-bottom ml-1">year</span>
+            </span>
+                        <span class="text-gray-500 text-base">99.99€</span>
+                    </label>
+                </div>
             </div>
             <button
                 @click="goToStripeCheckout"
