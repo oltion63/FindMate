@@ -164,14 +164,12 @@ const breadcrumbs: BreadcrumbItem[] = [
             <UploadCVModal  v-if="showModal" :show="showModal" @close="showModal = false" />
             <EditCVModal :currentCV="currentCV" v-if="showEditModal"  :show="showEditModal"  @close="showEditModal=false"></EditCVModal>
             <ShowCVModal :user="user" v-if="isCvVisible" @close="closeCv"/>
-            <ShowCVEmployer v-if="isEmCvVisible" :selectedCv="selectedCv" @close="closeCvModal"/>
+
 
             <div class="lg:flex justify-center gap-9 mx-4 xl:mx-0 max-w-72 md:max-w-6xl">
                 <UserInfo :user="user"/>
                 <div class="w-full" id="right-side">
                     <UserStats :isModalVisible="isModalVisible" @update:isModalVisible="updateModalVisibility" :countApplications="countApplications" :countSaved="countSaved" :countApplied="countApplied" :countPosts="countPosts" :isCvVisible="isCvVisible" @update:isCvVisible="updateCvVisibility"/>
-                    <UserApplications v-if="$page.props.auth.user.role === 'employer'" :applications="applications" :isEmCvVisible="isEmCvVisible" @update:isEmCvVisible="updateEmCvVisibility"/>
-                    <EmployeeApplications v-if="$page.props.auth.user.role === 'employee'" :employeeApplications="employeeApplications"  />
                     <SavedPosts v-if="$page.props.auth.user.role === 'employee'" :savedPosts="savedPosts"/>
                     <EmployerPosts v-if="$page.props.auth.user.role === 'employer'" :employerPosts="employerPosts"/>
                 </div>
