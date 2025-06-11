@@ -2,6 +2,7 @@
 import {useForm, Link} from "@inertiajs/vue3";
 import {ref} from "vue";
 import ConfirmationModal from "@/components/ConfirmationModal.vue";
+import { Trash2 } from 'lucide-vue-next';
 
 const props = defineProps({
     Posts:Array,
@@ -27,46 +28,51 @@ const openDeleteModal = (id) => {
 </script>
 
 <template>
-    <div id="table1" >
-        <div class="mx-auto w-full ">
-            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+    <div id="table1" class="my-6 pb-6">
+        <div class="mx-auto max-w-screen-xl mt-9">
+            <div class="bg-[#F6F6F6] relative shadow-md sm:rounded-lg overflow-x-auto w-full border border-[#E0E0E0] rounded-lg">
+                <div class="flex justify-center p-4">
+                    <span class="font-semibold text-[#111111] text-base">Posted Jobs</span>
+                </div>
 
-                <div class="overflow-x-auto max-h-96">
-                    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300">
-                        <thead class="text-xs text-gray-100 uppercase bg-gray-700 sticky top-0 z-10">
+                <div class="overflow-x-auto max-h-60">
+                    <table class="w-full text-sm text-left text-[#2F2F2F] ">
+                        <thead class="text-xs uppercase bg-[#2F2F2F] text-white sticky top-0 z-10">
                         <tr>
-                            <th scope="col" class="px-6 py-3">Titulli</th>
-                            <th scope="col" class="px-6 py-3">Kompania</th>
-                            <th scope="col" class="px-6 py-3">Expiration</th>
-                            <th scope="col" class="px-6 py-3">Email</th>
-                            <th colspan="5" class="px-6 py-3 text-center">Action</th>
+                            <th scope="col" class="px-4 py-3">Title</th>
+                            <th scope="col" class="px-4 py-3">Company</th>
+                            <th scope="col" class="px-4 py-3">Expiration</th>
+                            <th scope="col" class="px-4 py-3">Email</th>
+                            <th scope="col" class="px-4 py-3 text-center" colspan="2">Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-[#E0E0E0]">
                         <tr v-if="Posts.length === 0">
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                            <td colspan="6" class="px-4 py-3 text-center text-gray-400">
                                 No Posts Yet
                             </td>
                         </tr>
-                        <tr v-for="post in Posts" :key="post.id" class="border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ post.tittle }}</td>
-                            <td class="px-6 py-4">{{ post.company.name}}</td>
-                            <td class="px-6 py-4">{{ post.expiration_date }}</td>
-                            <td class="px-6 py-4">{{ post.user.email }}</td>
-
-                            <td class=" py-4 text-center">
+                        <tr v-for="post in Posts" :key="post.id" class="bg-white hover:bg-[#FFF8ED] transition">
+                            <td class="px-4 py-3 font-medium text-[#111111] max-w-60 break-words whitespace-normal">{{ post.tittle }}</td>
+                            <td class="px-4 py-3">{{ post.company.name }}</td>
+                            <td class="px-4 py-3">{{ post.expiration_date }}</td>
+                            <td class="px-4 py-3">{{ post.user.email }}</td>
+                            <td class="px-4 py-3 text-center">
                                 <button
                                     type="button"
                                     @click="openDeleteModal(post.id)"
-                                    class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
-                                    Delete
-                                </button>
+                                    class="hover:scale-110 transition"
+                                >
+                                    <Trash2 class="w-5 h-5 text-red-600"/>
 
+                                </button>
                             </td>
-                            <td class="px-6 py-4 text-center">
+
+                            <td class="px-4 py-3 text-center">
+
                                 <Link
-                                    :href="route('jobs.show', {id: post.id})"
-                                    class="text-blue-500 underline "
+                                    :href="route('jobs.show', { id: post.id })"
+                                    class="underline text-blue-600 hover:text-blue-800"
                                 >
                                     Details
                                 </Link>
@@ -78,6 +84,7 @@ const openDeleteModal = (id) => {
             </div>
         </div>
     </div>
+
     <ConfirmationModal
         :show="showDeleteModal"
         title="Confirm Deletion"
@@ -86,3 +93,4 @@ const openDeleteModal = (id) => {
         @confirm="confirmDelete"
     />
 </template>
+

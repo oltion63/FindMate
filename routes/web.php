@@ -122,5 +122,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard/reports/data', [GenerateReportController::class, 'index'])->name('dashboard.reports.data');
 });
 
+Route::get('/admin/manageusers', [AdminController::class, 'userposts'])->name('manageUsers');
+
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

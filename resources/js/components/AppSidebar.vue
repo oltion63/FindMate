@@ -5,7 +5,8 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, User, Briefcase, PlusCircle, Proportions } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, User, Briefcase, PlusCircle, Proportions, Wrench } from 'lucide-vue-next';
+
 import AppLogo from './AppLogo.vue';
 import { MessageCircle } from 'lucide-vue-next';
 
@@ -45,6 +46,13 @@ const mainNavItems: NavItem[] = [
         icon: Proportions,
         role: ['admin'],
     },
+    {
+        title: 'Manage Users & Posts',
+        href: '/admin/manageusers',
+        icon: Wrench,
+        role: ['admin'],
+    },
+
 
 ];
 
