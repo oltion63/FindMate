@@ -73,7 +73,8 @@ class ApplicationController extends Controller
         }
 
         $employer = $post->user_id;
-        $message = $employer . ' has canceled application for ' . $post->tittle;
+        $employer_name = $post->user->name;
+        $message = $employer_name . ' has canceled application for ' . $post->tittle;
         event(new Notifications($message, $employer));
 
         return redirect()->back()->with('success', 'Application has been deleted');
@@ -118,7 +119,7 @@ class ApplicationController extends Controller
                     $room->users()->detach();
                     $room->delete();
                 }
-                
+
                 $application->room_id = null;
             }
             $application->update(['status' => 'rejected']);

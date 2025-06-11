@@ -40,12 +40,12 @@ class ProfileController extends Controller
             })
             ->get();
         $employeeApplications = Application::with(['post.company', 'user'])
-            ->where('user_id', $currentUserId, )->get();
+            ->where('user_id', $currentUserId)->get();
         $currentCV = CV::where('user_id', $currentUserId)->value('file');
         $savedPosts = SavedPosts::with(['post.company', 'user'])
-            ->where('user_id', $currentUserId, )->get();
+            ->where('user_id', $currentUserId)->get();
         $employerPosts = Post::with(['category', 'location', 'company'])
-            ->where('user_id', $currentUserId, )->get();
+            ->where('user_id', $currentUserId)->get();
 
 
         return Inertia::render('profile/profile', [
@@ -135,6 +135,28 @@ class ProfileController extends Controller
         return back()->with('error', 'No image was uploaded!');
 
     }
+    public function employerApp()
+    {
+        $currentUserId = auth()->id();
+        $applications = Application::with(['post', 'user.cv'])
+            ->whereHas('post', function ($query) use ($currentUserId) {
+                $query->where('user_id', $currentUserId);
+            })
+            ->get();
+        return Inertia::render('profile/EmployerApplications', [
+            'applications' => $applications,
+        ]);
+    }
+    public function employeeApps()
+    {
+        $currentUserId = auth()->id();
+        $employeeApplications = Application::with(['post.company', 'user'])
+            ->where('user_id', $currentUserId)->get();
+        return Inertia::render('profile/EmployeeApplications', [
+            'employeeApplications' => $employeeApplications,
+        ]);
+    }
+
 
     /**
      * Delete the user's account.

@@ -123,6 +123,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::get('/admin/manageusers', [AdminController::class, 'userposts'])->name('manageUsers');
+Route::get('/employerApplications', [ProfileController::class, 'employerApp'])->name('employerApp');
+Route::get('/employeeApplications', [ProfileController::class, 'employeeApps'])->name('employeeApps');
 
 
 require __DIR__.'/settings.php';

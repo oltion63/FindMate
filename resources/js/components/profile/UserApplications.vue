@@ -37,7 +37,7 @@ const openModal = (cvUrl, value) => {
                 <div class="flex justify-center p-4">
                     <span class="font-semibold text-[#111111] text-base">Applications</span>
                 </div>
-                <div class="overflow-x-auto max-h-60 scroll-smooth">
+                <div class="overflow-x-auto max-h-96 scroll-smooth">
                     <table class="w-full text-sm text-left text-[#2F2F2F] capitalize">
                         <thead class="text-xs uppercase bg-[#2F2F2F] text-white sticky top-0 z-10">
                         <tr>
