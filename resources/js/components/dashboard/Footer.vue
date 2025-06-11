@@ -56,7 +56,7 @@
             </div>
 
             <!-- Learn More Section -->
-            <div>
+            <div class="w-fit">
                 <h4 class="uppercase font-bold text-sm mb-4 tracking-wide text-[#FFCB74]">LEARN MORE</h4>
                 <ul class="space-y-3">
                     <li>

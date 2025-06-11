@@ -24,7 +24,7 @@ function formatDate(dateString) {
                 <div class="flex justify-center p-4">
                     <span class="font-semibold text-[#111111] text-base">Your Applications</span>
                 </div>
-                <div class="overflow-x-auto max-h-96">
+                <div class="overflow-x-auto max-h-96 min-h-60">
                     <table class="w-full text-sm text-left text-[#2F2F2F] capitalize">
                         <thead class="text-xs uppercase bg-[#2F2F2F] text-white sticky top-0 z-10">
                         <tr>
@@ -32,13 +32,13 @@ function formatDate(dateString) {
                             <th scope="col" class="px-4 py-3">Company</th>
                             <th scope="col" class="px-4 py-3">Application Date</th>
                             <th scope="col" class="px-4 py-3">Status</th>
-                            <th scope="col" class="px-4 py-3"></th>
                             <th scope="col" class="px-4 py-3">Chat</th>
+                            <th scope="col" class="px-4 py-3"></th>
                         </tr>
                         </thead>
                         <tbody class="overflow-y-auto max-h-96 divide-y divide-[#E0E0E0]">
-                        <tr v-if="employeeApplications.length === 0">
-                            <td colspan="6" class="px-4 py-3 text-center text-gray-400">
+                        <tr v-if="employeeApplications.length === 0" class="h-48">
+                            <td colspan="6" class="px-4 py-3 text-center text-gray-400 align-middle">
                                 NO APPLICATIONS YET
                             </td>
                         </tr>
@@ -62,6 +62,16 @@ function formatDate(dateString) {
                                 {{ application.status }}
                             </td>
                             <td class="px-4 py-3">
+                                <a
+                                    v-if="application.room_id"
+                                    :href="`/chat/room/${application.room_id}`"
+                                    class="text-blue-600 underline hover:text-blue-800"
+                                >
+                                    Open Chat
+                                </a>
+                                <span v-else class="text-gray-400">Not available</span>
+                            </td>
+                            <td class="px-4 py-3">
                                 <form
                                     :id="'delete-' + application.id"
                                     class="hidden"
@@ -75,16 +85,7 @@ function formatDate(dateString) {
                                     Cancel
                                 </button>
                             </td>
-                            <td class="px-4 py-3">
-                                <a
-                                    v-if="application.room_id"
-                                    :href="`/chat/room/${application.room_id}`"
-                                    class="text-blue-600 underline hover:text-blue-800"
-                                >
-                                    Open Chat
-                                </a>
-                                <span v-else class="text-gray-400">Not available</span>
-                            </td>
+
                         </tr>
                         </tbody>
                     </table>

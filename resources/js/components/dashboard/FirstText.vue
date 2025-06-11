@@ -19,7 +19,7 @@ import {Link} from "@inertiajs/vue3";
 
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex justify-end">
-                <img :src="'storage/images/confusion.png'" alt="findJob">
+                <img :src="'storage/images/confusion1.png'" alt="findJob" class="w-96 h-96" >
             </div>
         </div>
         <div class="w-full hidden lg:flex justify-center pb-14">

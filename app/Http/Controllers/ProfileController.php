@@ -129,7 +129,7 @@ class ProfileController extends Controller
             $user->update([
                 'image' => $path,
             ]);
-            return back()->with('status', 'Profile image updated successfully.');
+            return back()->with('success', 'Profile image updated successfully.');
         }
 
         return back()->with('error', 'No image was uploaded!');

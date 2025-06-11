@@ -180,7 +180,7 @@ class PostController extends Controller
 
     public function show($id){
         $user = User::with(['city', 'cv'])->where('id', Auth::id())->first();
-        $post = Post::with(['category', 'location', 'company' ])->find($id);
+        $post = Post::with(['category', 'location', 'company', 'user' ])->find($id);
         $savedPost = SavedPosts::where('post_id', $id)
             ->where('user_id', Auth::id())
             ->pluck('id')

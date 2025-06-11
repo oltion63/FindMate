@@ -57,15 +57,15 @@ const breadcrumbs: BreadcrumbItem[] = [
 <template>
     <Head title="Add Jobs" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <main class="p-6 bg-[#F6F6F6] min-h-screen">
-            <div class="mx-auto max-w-3xl bg-white rounded-xl shadow-lg border border-gray-200 p-8 mt-16">
+        <div class="p-4  ">
+            <div class="mx-auto max-w-3xl bg-white rounded-xl shadow-lg border border-gray-200 p-8">
                 <h2 class="mb-6 text-3xl font-extrabold text-[#111111]">Add a New Job</h2>
                 <form @submit.prevent="submit">
                     <input type="hidden" name="user_id" v-model="form.user_id" />
-                    <div class="space-y-10">
+                    <div class="space-y-6">
 
                         <!-- Basic Info: Title and Company -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <InputLabel for="tittle" class="mb-2 font-semibold text-gray-800" value="Title" />
                                 <JobsTextInput
@@ -209,13 +209,13 @@ const breadcrumbs: BreadcrumbItem[] = [
                     <div class="mt-10 flex justify-center">
                         <button
                             type="submit"
-                            class="w-full sm:w-auto px-10 py-3 text-lg font-semibold text-[#111111] bg-[#FFCB74] rounded-full shadow-md hover:bg-[#e6b864] transition duration-200"
+                            class="w-full sm:w-auto px-6 py-2  font-semibold text-[#111111] bg-[#FFCB74] rounded-full shadow-md hover:bg-[#e6b864] transition duration-200"
                         >
                             Add Job
                         </button>
                     </div>
                 </form>
             </div>
-        </main>
+        </div>
     </AppLayout>
 </template>
