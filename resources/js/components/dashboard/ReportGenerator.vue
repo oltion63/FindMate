@@ -1,9 +1,9 @@
 <template>
-    <div class="p-6">
-        <h1 class="text-2xl font-bold mb-4">Generate Reports</h1>
+    <div class="p-6 flex flex-col items-center justify-center text-center">
+        <h1 class="text-2xl font-bold mb-4 text-[#111111]">Generate Reports</h1>
 
-        <div class="flex flex-wrap gap-4 items-center mb-6">
-            <select v-model="type" class="border p-2 rounded">
+        <div class="flex flex-wrap gap-4 items-center justify-center mb-6">
+            <select v-model="type" class="border border-[#E0E0E0] p-2 rounded bg-white text-[#2F2F2F]">
                 <option value="users">User Registrations</option>
                 <option value="jobs">Jobs Posted</option>
                 <option value="applications">Job Applications</option>
@@ -11,24 +11,25 @@
                 <option value="accepted_applications">Accepted Applications</option>
             </select>
 
-            <select v-model="interval" class="border p-2 rounded">
+            <select v-model="interval" class="border border-[#E0E0E0] p-2 rounded bg-white text-[#2F2F2F]">
                 <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>
                 <option value="yearly">Yearly</option>
             </select>
 
-            <button @click="handleGenerate" class="bg-blue-600 text-white px-4 py-2 rounded">
+            <button @click="handleGenerate" class="bg-[#FFCB74] text-[#111111] px-4 py-2 rounded hover:bg-[#F6F6F6] hover:underline transition">
                 Generate Report
             </button>
         </div>
 
         <div v-if="message" class="text-green-600 font-semibold mt-4">{{ message }}</div>
+
         <div
             v-if="showModal"
             class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
         >
             <div class="bg-white rounded-lg shadow-lg p-6 w-80">
-                <h2 class="text-lg font-semibold mb-4">Choose Export Format</h2>
+                <h2 class="text-lg font-semibold mb-4 text-[#111111]">Choose Export Format</h2>
                 <div class="flex justify-between gap-4">
                     <button
                         @click="exportReport('pdf')"
@@ -53,6 +54,7 @@
         </div>
     </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue'
