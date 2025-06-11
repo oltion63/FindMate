@@ -3,6 +3,8 @@ import UserApplications from '@/components/profile/UserApplications.vue';
 import { ref } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import ShowCVEmployer from '@/pages/profile/ShowCVEmployer.vue';
+import {Head} from '@inertiajs/vue3';
+import type { BreadcrumbItem } from '@/types';
 
 const props = defineProps({
     applications:{
@@ -22,10 +24,17 @@ const closeCvModal = () => {
     selectedCv.value = null;
 };
 
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Applications',
+        href: '/employerApplications',
+    },
+];
 </script>
 
 <template>
-    <AppLayout>
+    <Head title="Applications"/>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <div class="max-w-6xl mx-auto w-full">
             <UserApplications v-if="$page.props.auth.user.role === 'employer'" :applications="applications" :isEmCvVisible="isEmCvVisible" @update:isEmCvVisible="updateEmCvVisibility"/>
         </div>
