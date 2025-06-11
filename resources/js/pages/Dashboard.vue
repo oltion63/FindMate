@@ -9,6 +9,7 @@ import UsersTable from "@/components/dashboard/UsersTable.vue";
 import PostsTable from "@/components/dashboard/PostsTable.vue";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import ReportGenerator from '@/components/dashboard/ReportGenerator.vue'
 
 
 const props = defineProps({
@@ -317,8 +318,11 @@ const breadcrumbs: BreadcrumbItem[] = [
             <PostsTable :Posts="Posts" v-if="currentTab === 'posts'"/>
         </section>
 </section>
+        <section class="xl:max-w-6xl max-w-xs md:max-w-2xl lg:max-w-4xl mx-auto px-4">
 
-
-
+            <div class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-2xl shadow-lg p-8 col-span-1 md:col-span-2 lg:col-span-3">
+                <ReportGenerator />
+            </div>
+        </section>
     </AppLayout>
 </template>
