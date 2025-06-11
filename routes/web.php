@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\GenerateReportController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -117,7 +118,9 @@ Route::middleware(['auth', 'admin'])->controller(ReportController::class)->group
 });
 Route::post('/storeReport',  [ReportController::class ,'store'])->name('storeReport');
 
-
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard/reports/data', [GenerateReportController::class, 'index'])->name('dashboard.reports.data');
+});
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
