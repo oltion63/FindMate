@@ -186,7 +186,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         </template>
 
         <section class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:max-w-6xl md:max-w-2xl lg:max-w-4xl max-w-xs w-full mx-auto px-4">
-            <DashboardInfoCard>
+            <DashboardInfoCard >
                 <template #Information> Employers</template>
                 <template #icon>
                     <UserCog />
@@ -230,19 +230,24 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </div>
             </div>
 
-            <div class="bg-gradient-to-br from-gray-100 to-gray-300 border border-gray-300 rounded-2xl shadow-lg p-8 transition-transform transform  hover:shadow-xl">
+            <div class="p-6 w-full h-full flex flex-col items-center justify-center text-center bg-gradient-to-br from-gray-100 to-gray-300 border border-gray-300 rounded-2xl shadow-lg p-8 transition-transform transform hover:shadow-xl ">
                 <ReportGenerator />
             </div>
+
         </section>
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 xl:max-w-6xl max-w-xs md:max-w-2xl lg:max-w-4xl mx-auto px-4">
-            <div class="bg-gray-800 border border-gray-300 rounded-2xl shadow-lg p-6 items-center space-y-4">
-                <span class="text-gray-50 text-2xl font-bold">Map of users</span>
+            <div class="bg-[#2F2F2F] border border-[#FFCB74] rounded-2xl shadow-lg p-6 items-center space-y-4">
+                <span class="text-[#F6F6F6] text-2xl font-bold">Map of users</span>
                 <div ref="mapRef" class="w-full h-96 rounded-xl z-40"></div>
             </div>
-            <div id="postsPerDay" class="bg-gray-800 border border-gray-300 rounded-2xl min-h-96 flex flex-col justify-between shadow-lg p-6   space-y-4">
-                <span class="text-gray-50 text-xl lg:text-2xl font-bold">Accepted/Rejected Applications</span>
-                <canvas ref="chartRef2" class=" w-full h-96"></canvas>
+            <div
+                id="postsPerDay"
+                class="bg-[#2F2F2F] border border-[#FFCB74] rounded-2xl min-h-96 flex flex-col justify-between shadow-lg p-6 space-y-4"
+            >
+                <span class="text-[#F6F6F6] text-xl lg:text-2xl font-bold">Accepted/Rejected Applications</span>
+                <canvas ref="chartRef2" class="w-full h-96"></canvas>
             </div>
         </section>
+
     </AppLayout>
 </template>
