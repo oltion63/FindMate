@@ -2,6 +2,7 @@
 import { useForm } from "@inertiajs/vue3";
 import ConfirmationModal from "@/components/ConfirmationModal.vue";
 import {ref} from "vue";
+import { Trash2 } from 'lucide-vue-next';
 
 const props = defineProps({
     Users: Array,
@@ -30,47 +31,51 @@ function formatDate(dateString) {
 </script>
 
 <template>
-    <div id="table1" class="">
-        <div class="">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden">
+    <div id="table1" class="mb-6">
+        <div class="mx-auto max-w-screen-xl mt-9">
+            <div class="bg-[#F6F6F6] relative shadow-md sm:rounded-lg overflow-x-auto w-full border border-[#E0E0E0] rounded-lg">
+                <div class="flex justify-center p-4">
+                    <span class="font-semibold text-[#111111] text-base">All Users</span>
+                </div>
                 <div class="overflow-x-auto max-h-96">
-                    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-300">
-                        <thead class="text-xs text-gray-100 uppercase bg-gray-700 sticky top-0 z-10">
+                    <table class="w-full text-sm text-left text-[#2F2F2F]">
+                        <thead class="text-xs uppercase bg-[#2F2F2F] text-white sticky top-0 z-10">
                         <tr>
-                            <th scope="col" class="px-6 py-3">Name</th>
-                            <th scope="col" class="px-6 py-3">Surname</th>
-                            <th scope="col" class="px-6 py-3">City</th>
-                            <th scope="col" class="px-6 py-3">Address</th>
-                            <th scope="col" class="px-6 py-3">Email</th>
-                            <th scope="col" class="px-6 py-3">Phone</th>
-                            <th scope="col" class="px-6 py-3">Birthday</th>
-                            <th scope="col" class="px-6 py-3">Joined At</th>
-                            <th scope="col" class="px-6 py-3 text-center">Action</th>
+                            <th scope="col" class="px-4 py-3">Name</th>
+                            <th scope="col" class="px-4 py-3">Surname</th>
+                            <th scope="col" class="px-4 py-3">City</th>
+                            <th scope="col" class="px-4 py-3">Address</th>
+                            <th scope="col" class="px-4 py-3">Email</th>
+                            <th scope="col" class="px-4 py-3">Phone</th>
+                            <th scope="col" class="px-4 py-3">Birthday</th>
+                            <th scope="col" class="px-4 py-3">Joined At</th>
+                            <th scope="col" class="px-4 py-3 text-center"></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-[#E0E0E0]">
                         <tr v-if="Users.length === 0">
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                            <td colspan="9" class="px-4 py-3 text-center text-gray-400">
                                 No Users Yet
                             </td>
                         </tr>
-                        <tr v-for="user in Users.filter(u => u.id !== $page.props.auth.user.id)" :key="user.id" class="border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ user.name }}</td>
-                            <td class="px-6 py-4">{{ user.lastname }}</td>
-                            <td class="px-6 py-4">{{ user.city?.name }}</td>
-                            <td class="px-6 py-4">{{ user.address }}</td>
-                            <td class="px-6 py-4">{{ user.email }}</td>
-                            <td class="px-6 py-4">{{ user.phone }}</td>
-                            <td class="px-6 py-4">{{ formatDate(user.birthday) }}</td>
-                            <td class="px-6 py-4">{{ formatDate(user.created_at) }}</td>
-                            <td class="px-6 py-4 text-center">
+                        <tr v-for="user in Users.filter(u => u.id !== $page.props.auth.user.id)" :key="user.id"
+                            class="bg-white hover:bg-[#FFF8ED] transition">
+                            <td class="px-4 py-3 font-medium text-[#111111]">{{ user.name }}</td>
+                            <td class="px-4 py-3">{{ user.lastname }}</td>
+                            <td class="px-4 py-3">{{ user.city?.name }}</td>
+                            <td class="px-4 py-3">{{ user.address }}</td>
+                            <td class="px-4 py-3">{{ user.email }}</td>
+                            <td class="px-4 py-3">{{ user.phone }}</td>
+                            <td class="px-4 py-3">{{ formatDate(user.birthday) }}</td>
+                            <td class="px-4 py-3">{{ formatDate(user.created_at) }}</td>
+                            <td class="px-4 py-3 text-center">
                                 <button
                                     type="button"
                                     @click="openDeleteModal(user.id)"
-                                    class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
-                                    Delete
+                                    class="hover:scale-110 transition"
+                                >
+                                    <Trash2 class="w-5 h-5 text-red-600"/>
                                 </button>
-
                             </td>
                         </tr>
                         </tbody>
@@ -79,6 +84,7 @@ function formatDate(dateString) {
             </div>
         </div>
     </div>
+
     <ConfirmationModal
         :show="showDeleteModal"
         title="Confirm Deletion"
@@ -87,3 +93,4 @@ function formatDate(dateString) {
         @confirm="confirmDelete"
     />
 </template>
+

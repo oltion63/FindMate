@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\GenerateReportController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,11 +15,29 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\MessageController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('profilePage');
+        }
+    }
     return Inertia::render('Welcome');
 })->name('welcome');
+
 Route::get('/home', function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('profilePage');
+        }
+    }
     return Inertia::render('Welcome');
 })->name('home');
 
@@ -84,11 +104,25 @@ Route::get('auth/google/callback', [GoogleAuthController::class, 'googleCallback
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/chat/room/{id}', [MessageController::class, 'room']);
+    Route::get('/chat/room/{id}', [MessageController::class, 'room'])->name('room');
     Route::get('/chat/messages', [MessageController::class, 'messages']);
     Route::post('/chat/message', [MessageController::class, 'sendMessage']);
     Route::get('/chat/list', [MessageController::class, 'userRooms']);
     Route::get('/chat/rooms', [MessageController::class, 'roomsPage']);
 });
+
+Route::middleware(['auth', 'admin'])->controller(ReportController::class)->group(function () {
+    Route::get('/admin/reports', 'index')->name('admin.reports');
+    Route::post('/dismissReport/{id}',  'dismissed')->name('dismissedReport');
+    Route::post('/reviewedReport/{id}',  'reviewed')->name('reviewedReport');
+});
+Route::post('/storeReport',  [ReportController::class ,'store'])->name('storeReport');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard/reports/data', [GenerateReportController::class, 'index'])->name('dashboard.reports.data');
+});
+
+Route::get('/admin/manageusers', [AdminController::class, 'userposts'])->name('manageUsers');
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

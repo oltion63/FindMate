@@ -45,6 +45,15 @@ class AdminController extends Controller
         $post->delete();
         return Redirect::back()->with('success', 'Post has been deleted');
     }
+    public function userposts(){
+        $Users = User::with('city')->get();
+        $Posts = Post::with('user','company')->get();
+
+        return Inertia::render('admin/ManageUsersPosts', [
+            'Users' => $Users,
+            'Posts' => $Posts,
+        ]);
+    }
 
 
 }
