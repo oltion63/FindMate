@@ -38,7 +38,7 @@ const clearFilters = () => {
 </script>
 
 <template>
-    <section id="left" class="w-4/5 mx-auto lg:w-1/3 h-fit bg-white border-gray-300 border rounded-lg lg:border-1">
+    <section id="left" class="w-4/5 mx-auto lg:w-1/3 h-fit border-gray-300 border rounded-lg lg:border-1">
         <div class="flex justify-between py-3 px-6">
             <span class="font-bold text-xl">Filter</span>
         </div>
@@ -46,7 +46,7 @@ const clearFilters = () => {
             <span class="font-bold">Location</span>
             <select
                 v-model="form.location"
-                class="rounded-md border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full bg-transparent">
+                class=" rounded-md border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full bg-transparent">
                 <option disabled selected value="">City</option>
                 <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
             </select>
@@ -81,13 +81,13 @@ const clearFilters = () => {
         <div class="px-6 py-4 grid w-3/4 gap-2 mx-auto">
             <button
                 @click="applyFilters"
-                class="bg-blue-500 text-white text-sm px-4 py-2 rounded-md shadow hover:bg-blue-600"
+                class="bg-[#2F2F2F] text-white text-sm px-4 py-2 rounded-md shadow hover:bg-gray-700"
             >
                 Apply Filters
             </button>
             <button
                 @click="clearFilters"
-                class="bg-red-600 text-white text-sm px-4 py-2 rounded-md shadow hover:bg-red-800"
+                class="bg-[#FFCB74] text-black text-sm px-4 py-2 rounded-md shadow hover:text-white"
             >
                 Remove Filters
             </button>

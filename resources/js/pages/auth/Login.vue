@@ -54,8 +54,8 @@ const submit = () => {
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
-        <div class="z-30 mt-6 w-full overflow-hidden bg-gradient-to-b from-cyan-100 via-white to-white px-6 pb-4 shadow-lg sm:max-w-sm sm:rounded-lg border border-gray-100">
-            <img src="/storage/images/logo.png" width="150px" height="150px" class="mx-auto" alt="logo">
+        <div class="z-30 mt-6 w-full overflow-hidden bg-gradient-to-b from-[#FFCB74] via-white to-gray-300 y-100 px-6 pb-4 shadow-lg sm:max-w-sm sm:rounded-lg ">
+            <img src="/storage/images/logo.png" width="150px" height="150px" class="invert-0 mx-auto" alt="logo">
             <span class="text-xl font-bold flex justify-center mb-2">Welcome Back</span>
             <p class="text-center text-gray-600 mb-6">Log in to continue your journey with us.</p>
         <form @submit.prevent="submit" class="">
@@ -112,7 +112,7 @@ const submit = () => {
 
             <div class="mt-4 flex items-center ">
                 <PrimaryButton
-                    class="w-full bg-gray-800 hover:bg-gray-700 border border-gray-200 py-3"
+                    class="w-full bg-[#111111] hover:bg-gray-700 border border-gray-200 py-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >

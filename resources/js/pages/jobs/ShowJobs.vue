@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {Head, Link, useForm} from "@inertiajs/vue3";
 import AppLayout from "@/layouts/AppLayout.vue";
 import JobDetails from "@/components/jobs/JobDetails.vue";
@@ -7,6 +7,7 @@ import {ref} from "vue";
 import ApplyModal from "@/pages/jobs/ApplyModal.vue";
 import AboutCompanyModal from "@/components/jobs/AboutCompanyModal.vue";
 import ReportModal from '@/pages/jobs/ReportModal.vue';
+import type { BreadcrumbItem } from '@/types/index.js';
 
 const props = defineProps({
     post: {
@@ -44,11 +45,19 @@ const updateACModalVisibility = (value) => {
 const closeACModal = () => {
     isACModalVisible.value = false;
 };
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: props.post.tittle,
+        href: '/jobs.index',
+    },
+];
+
 </script>
 
 <template>
     <Head :title="post.tittle"/>
-    <AppLayout>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <main class="mx-4 pb-4">
             <div class="flex justify-between mx-8 items-end lg:mt-16">
                 <Link
