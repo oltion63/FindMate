@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use App\Jobs\SendReportDismissedMail;
+use App\Jobs\SendReportReviewedMail;
 
 
 class ReportController extends Controller
@@ -90,6 +92,8 @@ class ReportController extends Controller
             ]
         );
 
+        SendReportDismissedMail::dispatch($report)->onQueue('queue');
+
         return redirect()->back()->with('success', 'Report Dismissed');
     }
 
@@ -114,6 +118,8 @@ class ReportController extends Controller
                 ]
             ]
         );
+
+        SendReportReviewedMail::dispatch($report)->onQueue('queue');
 
         return redirect()->back()->with('success', 'Report Reviewed');
     }

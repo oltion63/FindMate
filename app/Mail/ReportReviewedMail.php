@@ -20,7 +20,7 @@ class ReportReviewedMail extends Mailable
      */
     public function __construct(Report $report)
     {
-        $this->report = $report;
+      $this->report = $report->load('user', 'post');
     }
 
     /**
