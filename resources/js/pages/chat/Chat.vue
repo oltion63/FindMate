@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
 import axios from 'axios'
 import { format } from 'date-fns'
@@ -6,6 +6,7 @@ import echo from '@/echo.js'
 import AppLayout from '@/layouts/AppLayout.vue'
 import ChatRoomList from '@/components/chat/ChatRoomList.vue'
 import { Head } from '@inertiajs/vue3';
+import type { BreadcrumbItem } from '@/types/index.js';
 
 const props = defineProps({
     room: Object,
@@ -96,11 +97,19 @@ onMounted(() => {
             console.error('Error joining channel:', err)
         })
 })
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: props.room.title,
+        href: '/chats',
+    },
+];
+
 </script>
 
 <template>
     <Head :title="room.title"/>
-    <AppLayout>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <div class="h-screen flex flex-col md:flex-row bg-gray-100">
             <div class="md:hidden bg-white px-4 py-3 border-b">
                 <label for="mobile-room-select" class="block text-sm font-medium mb-1">Select Chat Room</label>

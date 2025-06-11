@@ -229,7 +229,7 @@ const submit = () => {
                         <div class="flex justify-center space-x-4">
                             <label
                                 for="image_profile"
-                                class="inline-flex items-center px-3 py-2 md:px-5 md:py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800"
+                                class="inline-flex items-center px-3 py-2 md:px-5 md:py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center  bg-[#FFCB74] rounded-lg hover:bg-[#e6b55f]"
                             >
                                 Choose File
                             </label>

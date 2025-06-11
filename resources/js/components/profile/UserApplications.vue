@@ -37,7 +37,7 @@ const openModal = (cvUrl, value) => {
                 <div class="flex justify-center p-4">
                     <span class="font-semibold text-[#111111] text-base">Applications</span>
                 </div>
-                <div class="overflow-x-auto max-h-96 scroll-smooth">
+                <div class="overflow-x-auto max-h-96 min-h-60 scroll-smooth">
                     <table class="w-full text-sm text-left text-[#2F2F2F] capitalize">
                         <thead class="text-xs uppercase bg-[#2F2F2F] text-white sticky top-0 z-10">
                         <tr>
@@ -51,8 +51,8 @@ const openModal = (cvUrl, value) => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-if="applications.length === 0">
-                            <td colspan="7" class="px-4 py-3 text-center text-[#2F2F2F]">
+                        <tr v-if="applications.length === 0" class="h-48">
+                            <td colspan="7" class="px-4 py-3 text-center text-[#2F2F2F] align-middle">
                                 No applications yet
                             </td>
                         </tr>

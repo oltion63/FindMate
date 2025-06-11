@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $query = $request->input('query');
+
         if (strlen($query) < 3) {
             return response()->json([]);
         }
+
+        $user = auth()->user();
+
         $results = Post::with('category', 'company', 'location')
             ->where(function ($q) use ($query) {
                 $q->where('tittle', 'like', "%$query%")
@@ -23,10 +28,13 @@ class SearchController extends Controller
                     ->orWhereHas('location', function ($q) use ($query) {
                         $q->where('name', 'like', "%$query%");
                     });
-            })
-            ->where('created_at', '<=', now()->subHours(24))
-            ->limit(10)
-            ->get();
-        return response()->json($results);
+            });
+
+        // 🧩 Add time restriction only for non-premium users
+        if (!$user || !$user->is_premium) {
+            $results->where('created_at', '<=', now()->subHours(24));
+        }
+
+        return response()->json($results->limit(10)->get());
     }
 }

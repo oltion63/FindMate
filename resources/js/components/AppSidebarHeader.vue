@@ -120,11 +120,11 @@ const form = useForm({
                     <li
                         v-for="result in results"
                         :key="result.id"
-                        class="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b last:border-none"
+                        class="px-4 py-2 hover:bg-[#FFF8ED] transition cursor-pointer border-b last:border-none"
                     >
                         <a
                             :href="`/jobs/${result.id}`"
-                            class="block px-4 py-2 hover:bg-gray-100 text-left"
+                            class="block px-4 py-2 hover:bg-[#FFF8ED] transition text-left"
                         >
                         <div class="font-semibold text-sm text-gray-800">{{ result.tittle }}</div>
                         <div class="text-xs text-gray-600 line-clamp-2">{{ result.description }}</div>

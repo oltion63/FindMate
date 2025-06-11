@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import {Link, Head} from '@inertiajs/vue3'
+import type { BreadcrumbItem } from '@/types';
 
 const props = defineProps({
     rooms: Array,
@@ -8,11 +9,18 @@ const props = defineProps({
     default: () => []
 });
 
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Chats',
+        href: '/chats',
+    },
+];
+
 </script>
 
 <template>
     <Head title="Chats"/>
-    <AppLayout>
+    <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-6">
             <h1 class="text-2xl font-bold mb-4">My Chat Rooms</h1>
             <div v-if="rooms.length === 0" class="text-gray-500">
