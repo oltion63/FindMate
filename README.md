@@ -142,8 +142,7 @@ PASSPORT_PASSWORD_CLIENT_SECRET=
 - npm install
 - php artisan key:generate
 - php artisan migrate --seed
-- php artisan serve
-- npm run dev
+- npm run serve
 
 ## Default Credentials
 
