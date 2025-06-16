@@ -27,16 +27,30 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'image' => 'profile/4hHxL9FQTTFkYRHctziAmMYxALh72D1ZkTGBsPZS.jpg',
-            'name' => 'Oltion',
-            'lastname' => 'Mustafa',
-            'email' => 'oltionmustafaa@gmail.com',
+            'name' => 'Employer',
+            'lastname' => '',
+            'email' => 'employer@gmail.com',
             'city_id' => City::find(4)->id,
-            'address' => 'Thimi Mitko',
-            'birthday' => '2002-11-04',
-            'phone' => '+38349388052',
+            'address' => 'street',
+            'birthday' => '1999-11-04',
+            'phone' => '+38349123456',
             'gender' => 'male',
             'role' => 'employer',
-            'password' => Hash::make('Olti2002.'),
+            'password' => Hash::make('password'),
+            'email_verified_at' => now(),
+        ]);
+        User::factory()->create([
+            'image' => 'profile/4hHxL9FQTTFkYRHctziAmMYxALh72D1ZkTGBsPZS.jpg',
+            'name' => 'Employee',
+            'lastname' => '',
+            'email' => 'employee@gmail.com',
+            'city_id' => City::find(4)->id,
+            'address' => 'street',
+            'birthday' => '1998-12-12',
+            'phone' => '+38349111222',
+            'gender' => 'female',
+            'role' => 'employee',
+            'password' => Hash::make('password'),
             'email_verified_at' => now(),
         ]);
         User::factory()->create([
@@ -51,6 +65,7 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male',
             'role' => 'admin',
             'password' => Hash::make('admin'),
+            'is_premium' => true,
             'email_verified_at' => now(),
         ]);
         User::factory(10)->create();
