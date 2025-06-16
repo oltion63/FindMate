@@ -29,3 +29,4 @@ yarn-error.log
 storage/app/public/company/
 storage/app/public/profile/
 storage/app/public/cv_files/
+app/secrets/
