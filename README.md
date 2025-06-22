@@ -143,6 +143,7 @@ PASSPORT_PASSWORD_CLIENT_SECRET=
 - php artisan key:generate
 - php artisan migrate --seed
 - php artisan queue:work --queue=queue
+- php artisan storage:link
 - npm run serve
 
 ## Default Credentials
