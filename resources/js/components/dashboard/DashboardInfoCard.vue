@@ -11,7 +11,7 @@
                 text-[#F6F6F6]">
 
         <!-- Title -->
-        <h5 class="mb-3 text-base md:text-lg font-semibold text-center uppercase">
+        <h5 class="mb-3 text-base lg:text-lg font-semibold text-center uppercase">
             <slot name="Information"></slot>
         </h5>
 

@@ -22,10 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 <template>
     <Head title="Manage Users & Posts"/>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class=" rounded-lg text-white pt-2  max-w-6xl mx-auto space-y-10 ">
             <UsersTable :Users="Users"/>
             <PostsTable :Posts="Posts"/>
-        </div>
-
     </AppLayout>
 </template>

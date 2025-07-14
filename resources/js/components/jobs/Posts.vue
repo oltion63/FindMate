@@ -45,7 +45,7 @@ const deleteSaved = (savedPostId) => {
 
 <template>
 
-    <div v-for="post in posts.data" id="posts" class="bg-white rounded-lg mb-4 hover:shadow-xl border-gray-300 border transition w-64 md:w-full mx-auto">
+    <div v-for="post in posts.data" id="posts" class="bg-white rounded-lg mb-4 hover:shadow-xl border-gray-300 border transition w-full md:w-full mx-auto">
         <Link
             :href="route('jobs.show', { id: post.id })"
         >
@@ -60,7 +60,7 @@ const deleteSaved = (savedPostId) => {
                         <svg v-if="post.user && post.user.is_premium" width="18" height="18" viewBox="0 0 24 24" fill="#FFD700" xmlns="http://www.w3.org/2000/svg" class="ml-1"><path d="M12 2l2.39 7.19H22l-5.8 4.21L17.58 22 12 17.77 6.42 22l1.38-8.6L2 9.19h7.61z"/></svg>
 
                     </span>
-                        <section class="md:space-x-8 text-xs md:text-base grid grid-cols-2 gap-x-8 md:flex whitespace-nowrap items-center">
+                        <section class="lg:space-x-4 text-xs md:text-base grid grid-cols-2 sm:grid-cols-4 gap-x-8 md:flex whitespace-nowrap items-center">
                         <span class="flex items-center gap-x-1">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" width="20px" height="20px"
                                  viewBox="0 0 24 24"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
@@ -79,7 +79,7 @@ const deleteSaved = (savedPostId) => {
                             ${{ post.salary }}
                         </span>
                             <span class="flex items-center gap-x-1">
-                            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
                                 id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g
                                 id="SVGRepo_iconCarrier"> <path
@@ -103,7 +103,7 @@ const deleteSaved = (savedPostId) => {
 
                 </div>
                 <div v-if="post.user_id === $page.props.auth.user.id" class="w-1/4 text-end">
-                    <h2 class="font-bold text-md md:text-lg text-indigo-950">Your Post</h2>
+                    <h2 class="font-bold text-md lg:text-lg text-indigo-950">Your Post</h2>
                 </div>
                 <div v-if="$page.props.auth.user.role === 'employee'" class="flex justify-end w-1/2 md:items-center items-start">
                     <button v-if="!savedPost.some(saved => saved.post_id === post.id)" class="hover:scale-105 transition"

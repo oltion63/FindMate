@@ -37,7 +37,7 @@ const openCv = () =>{
 <template>
     <div
         id="stats"
-        class="space-y-4 lg:space-y-0 lg:flex justify-evenly bg-[#2F2F2F] rounded-lg p-6 text-[#F6F6F6] text-sm"
+        class="space-y-4 lg:space-y-0 max-w-72 sm:max-w-full lg:flex justify-evenly bg-[#2F2F2F] rounded-lg p-6 text-[#F6F6F6] text-sm"
     >
         <button
             v-if="$page.props.auth.user.role === 'employee'"

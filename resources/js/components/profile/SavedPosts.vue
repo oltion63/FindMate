@@ -35,7 +35,7 @@ const openDeleteModal = (id) => {
 <template>
     <div id="table1" class="mb-6">
         <div class="mx-auto max-w-screen-xl mt-9">
-            <div class="bg-[#F6F6F6] relative shadow-md sm:rounded-lg overflow-x-auto w-full border border-[#E0E0E0] rounded-lg">
+            <div class="bg-[#F6F6F6] relative shadow-md sm:rounded-lg overflow-x-auto max-w-72 sm:max-w-full border border-[#E0E0E0] rounded-lg">
                 <div class="flex justify-center p-4">
                     <span class="font-semibold text-[#111111] text-base">Saved Posts</span>
                 </div>
