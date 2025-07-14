@@ -29,7 +29,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     <AppLayout :breadcrumbs="breadcrumbs">
         <div id="table1">
             <div class="mx-auto mt-9 max-w-[90%]">
-                <div class="relative w-full overflow-x-auto scroll-smooth rounded-lg bg-[#F6F6F6] shadow-md sm:rounded-lg">
+                <div class="relative w-full overflow-x-auto max-w-72 sm:max-w-full mx-auto scroll-smooth rounded-lg bg-[#F6F6F6] shadow-md sm:rounded-lg">
                     <div class="flex justify-center p-4">
                         <span class="text-base font-semibold text-[#111111]">Flagged Posts</span>
                     </div>

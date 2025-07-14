@@ -16,7 +16,7 @@ const isProfileIncomplete = !props.user.phone || !props.user.birthday || !props.
 </script>
 
 <template>
-    <div id="left-side" class="bg-[#2F2F2F] mb-4 lg:w-1/3 h-fit text-[#F6F6F6] p-6 rounded-lg text-sm">
+    <div id="left-side" class="bg-[#2F2F2F] mb-4 lg:w-1/3 max-w-72 sm:max-w-full h-fit text-[#F6F6F6] p-6 rounded-lg text-sm">
 
     <span v-if="isProfileIncomplete" class="text-[#FFCB74] block mb-2">
       Please complete your profile information.
